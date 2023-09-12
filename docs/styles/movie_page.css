@@ -58,6 +58,7 @@ body{
     width: auto;
     height: auto;
     border-radius: 2rem;
+    
 }
 
 .poster-container ul {
@@ -201,4 +202,24 @@ body{
 
 .info-container i{
     color: var(--vermelho-principal);
+}
+
+
+@media screen and (max-width: 768px) {
+    .container-movie {
+        flex-direction: column;
+    }
+
+    .coluna {
+        margin: 10px 0;
+    }
+
+    .poster-container img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .poster-container li {
+        font-size: 1.5rem;
+    }
 }

@@ -1,63 +1,87 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://kit.fontawesome.com/23fd127124.js" crossorigin="anonymous"></script>
-  <title>Movie Page</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/movie_page.css">
+    <script src="https://kit.fontawesome.com/23fd127124.js" crossorigin="anonymous"></script>
+    <title>Popcorn Prose</title>
 </head>
 <body>
-
-    <nav>
-        <ul>
-            <li><a href="#">POPCORN PROSE</a></li>
-        </ul>
-    </nav>
-  
-    <div class="poster-container">
-        <img src="https://i.ebayimg.com/images/g/gm8AAOSw2dJkTvoK/s-l500.jpg" alt="poster" crossorigin="anonymous">
-    <div class="poster-info">
-      <ul>
-        <li>
-          <i class="fa-solid fa-eye" style="color: #000"></i>
-          <p>10.8M</p>
-        </li>
-        <li>
-          <i class="fa-solid fa-heart" style="color: #000"></i>
-          <p>10.8M</p>
-        </li>
-      </ul>
-      <button class="btn-poster">+ informações</button>
-    </div>
+    <header class="popcorn-nav">
+        <h1><i class="fa-solid fa-film"></i>Popcorn Prose</h1>
+    </header>
     
-  </div>
+    <div class="container-movie">
+        <div class="coluna">
+            <div class="poster-container">
+                <img src="https://images1-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&refresh=2592000&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F%2FuLlrDUtFG2tKtDcJN6kBznlqqsp.jpg" alt="poster">
+                <ul>
+                    <li>
+                      <i class="fa-solid fa-star" style="color: rgb(241, 241, 13);"></i>
+                      <p id="rating"></p>
+                    </li>
+      
+                    <li>
+                      <i class="fa-solid fa-eye" style="color: rgb(2, 207, 2);"></i>
+                      <p id="views"></p>
+                    </li>
+                    <li>
+                      <i class="fa-solid fa-heart" style="color: rgb(255, 81, 81);"></i>
+                      <p id="likes"></p>
+                    </li>
+                  </ul>
+            </div>
+        </div>
+        <div class="coluna">
+            <div class="logo-container">
+                <img src="https://image.tmdb.org/t/p/w300//8csBgT5y8iyB1bywNQLI6BApX8G.png" alt="logo">
+                <div class="rating">
+                    <i class="rating__star far fa-star"></i>
+                    <i class="rating__star far fa-star"></i>
+                    <i class="rating__star far fa-star"></i>
+                    <i class="rating__star far fa-star"></i>
+                    <i class="rating__star far fa-star"></i>
+                </div> 
+            </div>
 
-  <div class="movie-info-container">
-    <h1>Homem-Aranha: Através do Aranhaverso</h1>
+            <div class="box-review">
+                <h3>Compartilhe sua opinião:</h3>
+                <textarea class="input-review"></textarea>
+                <button>
+                    <span class="label-down"><i class="fa-solid fa-paper-plane main-text"></i> Enviar</span>
+                    <span class="label-down"><i class="fa-solid fa-paper-plane main-text"></i> Enviar</span>
+                </button>
+            </div>
 
-    <div class="rating">
-      <i class="rating__star far fa-star"></i>
-      <i class="rating__star far fa-star"></i>
-      <i class="rating__star far fa-star"></i>
-      <i class="rating__star far fa-star"></i>
-      <i class="rating__star far fa-star"></i>
+            <div class="info-container">
+                <h3>Sinopse</h3>
+                <p>Com o retorno do Imperador Palpatine, a Resistência toma a frente da batalha. Treinando para ser uma completa Jedi, Rey se encontra em conflito com passado e futuro,
+                e teme pelas respostas que pode conseguir com Kylo Ren.</p>
+
+                <ul>
+                    <li>
+                      <i class="fa-solid fa-calendar"></i>
+                      <p id="release-year"></p>
+                    </li>
+            
+                    <li>
+                      <i class="fa-solid fa-film"></i>
+                      <p id="genre"></p>
+                    </li>
+    
+                    <li>
+                      <i class="fa-solid fa-clock"></i>
+                      <p id="duration"></p>
+                    </li>
+    
+                  </ul>
+            </div>
+
+            
+            
+        </div>
     </div>
 
-    <div class="box-review">
-      <h3>Compartilhe sua opinião</h3>
-      <div class="textarea-container">
-        <textarea alt="review box" class="input-review"></textarea>
-        <button><i class="fa-solid fa-paper-plane"></i></button>
-      </div>
-    </div>
-
-    <div class="sinopse-box">
-      <h4>Sinopse</h4>
-      <p>Depois de se reunir com Gwen Stacy, 
-        Homem-Aranha é jogado no multiverso, 
-        onde ele encontra uma equipe encarregada de proteger sua própria existência.</p>
-
-    </div>
-  </div>
 </body>
 </html>

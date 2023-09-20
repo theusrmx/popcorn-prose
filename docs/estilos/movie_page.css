@@ -65,7 +65,7 @@ body{
 .poster-container ul {
     list-style: none;
     text-align: center;
-    padding: 0; /* Removido o padding padrão da lista */
+    padding: 0; 
 }
 
 .poster-container li {
@@ -73,6 +73,11 @@ body{
     margin: 10px;
     padding: 10px;
     font-size: 2rem;
+}
+
+.poster-container p{
+    color: #ffffff;
+    font-size: 16px;
 }
 
 .logo-container {

@@ -1,12 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
 *{
     font-family: 'Poppins', sans-serif;
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    color: #ffffff;
 }
 
 body{
-    background-color: #1e1e1e;
+    background-image: url('https://images2.alphacoders.com/131/1316969.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.container {
+    background: rgba(0, 0, 0, 0.5); /* Cor de fundo com 50% de opacidade (aqui é preto com 50% de opacidade) */
+    padding: 20px; /* Adicione algum preenchimento para garantir que o conteúdo seja visível */
 }
 
 .popcorn-nav{

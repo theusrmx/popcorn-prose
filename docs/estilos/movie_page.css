@@ -37,7 +37,6 @@ body{
     display: flex;
     margin: 0 auto;
     padding: 20px;
-    background: radial-gradient(at left top, rgb(207, 181, 188), rgb(33, 55, 92), rgb(30, 30, 30) 70%);
 }
 
 .coluna {

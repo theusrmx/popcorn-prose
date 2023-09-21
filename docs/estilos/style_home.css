@@ -1,0 +1,163 @@
+.top-banner {
+    display: flex;
+    justify-content: space-between;
+}
+
+.welcome-message{
+    color: #fff;
+    margin: 50px;
+    
+}
+
+.welcome-message h1{
+    font-size: 55px;
+    color: #D83333;
+    font-weight: 700;
+}
+
+
+.welcome-message h4{
+    font-size: 19px;
+    font-weight: 600;
+    
+}
+
+.info-user{
+    color: #FFF;
+    padding: 10px;
+    font-size: 24px;
+    max-width: fit-content;
+    margin: 50px;
+}
+
+.info-user h4{
+    font-weight: 300;
+}
+
+.info-user i{
+    padding-right: 15px;
+}
+
+.info-user button, .info-user a{
+    background-color: #147a04;
+    border-radius: 18px;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    width: 150px;
+    text-decoration: none;
+}
+
+.my-movies h2, .my-series h2{
+
+    font-weight: 300;
+    color: #D83333;
+}
+
+/* Estilos para a seção de filmes */
+.my-movies, .my-series {
+    margin: 20px;
+    padding: 10px;
+}
+
+/* Estilos para o contêiner de cards de filme */
+.movie-cards, .series-cards {
+    display: flex;
+    flex-wrap: nowrap; /* Evita que os cards quebrem para a próxima linha */
+    overflow-x: auto; /* Adiciona uma barra de rolagem horizontal quando necessário */
+    cursor: pointer;
+    
+}
+
+/* Estilos para cada card de filme */
+.movie-card {
+    flex: 0 0 auto; /* Os cards não se esticarão, eles terão um tamanho fixo */
+    margin-right: 20px; /* Espaço entre os cards */
+    overflow: hidden; /* Evita que o conteúdo transborde (opcional) */
+    text-align: center; /* Centraliza o conteúdo horizontalmente */
+    position: relative; /* Para posicionar o título dentro do card */
+    
+    
+}
+
+/* Estilos para a imagem dentro do card */
+.movie-card img {
+    width: 141px;
+    height: 215px;
+    border-radius: 14px;
+}
+
+/* Estilos para o título do filme dentro do card */
+.movie-title {
+    font-size: 14px;
+    color: #FFF;
+    width: 100%;
+    left: 0;
+    max-width: 141px;
+    margin-bottom: 15px;
+}
+
+/* Estilo para o contêiner que contém a barra de rolagem */
+::-webkit-scrollbar {
+    width: 10px; /* Largura da barra de rolagem */
+    background-color: transparent; /* Fundo transparente para o contêiner da barra de rolagem */
+    padding: 10px;
+  }
+  
+  /* Estilo para o trilho (track) da barra de rolagem */
+  ::-webkit-scrollbar-track {
+    background-color: transparent; /* Fundo transparente para o trilho */
+  }
+  
+  /* Estilo para o polegar (thumb) da barra de rolagem */
+  ::-webkit-scrollbar-thumb {
+    background-color: #888; /* Cor do polegar */
+    border-radius: 5px; /* Borda arredondada do polegar */
+  }
+  
+  /* Estilo quando o usuário passa o mouse sobre a barra de rolagem */
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: #555; /* Cor do polegar quando o mouse está sobre ele */
+  }
+  
+
+  @media screen and (max-width: 768px) {
+    .top-banner{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .logo-escrito{
+        height: 50px; 
+    }
+    
+    .logo-mascote{
+        height: 60px; 
+    }
+    
+
+    .welcome-message, .info-user{
+       margin: 15px;
+    }
+    .welcome-message h1{
+        font-size: 40px;
+    }
+
+    .welcome-message h4{
+        font-size: 15px;
+    }
+
+    .info-user h4{
+        font-size: 20px;
+    }
+
+    .info-user button{
+        width: 127px;
+    }
+
+    .info-user a{
+        padding: 5px;
+    }
+
+  }

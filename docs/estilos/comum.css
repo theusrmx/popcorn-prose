@@ -10,9 +10,7 @@
 }
 
 body{
-    background-image: url('https://images2.alphacoders.com/131/1316969.png');
-    background-size: cover;
-    background-repeat: no-repeat;
+    background-color: #1e1e1e;
 }
 
 .container {

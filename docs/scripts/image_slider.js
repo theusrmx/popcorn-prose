@@ -5,8 +5,8 @@ const SLIDE_INTERVAL = 5000;
 const backgroundSlide = document.getElementById('backgroundSlide');
 async function fetchPopularMoviesAndSeries() {
     try {
-      const responseMovies = await fetch(`https://api.themoviedb.org/3/trending/movie/day?api_key=${API_KEY}`);
-      const responseSeries = await fetch(`https://api.themoviedb.org/3/trending/tv/day?api_key=${API_KEY}`);
+      const responseMovies = await fetch(`https://api.themoviedb.org/3/trending/movie/week?api_key=${API_KEY}`);
+      const responseSeries = await fetch(`https://api.themoviedb.org/3/trending/tv/week?api_key=${API_KEY}`);
   
       const movieData = await responseMovies.json();
       const seriesData = await responseSeries.json();
@@ -26,12 +26,21 @@ async function fetchPopularMoviesAndSeries() {
     let currentIndex = 0;
   
     function changeSlide() {
-      backgroundSlide.style.backgroundImage = `url(${IMAGE_BASE_URL}${backdrops[currentIndex]})`;
-      currentIndex = (currentIndex + 1) % backdrops.length;
+        backgroundSlide.classList.add('fade'); // Adiciona a classe fade para aplicar a transição de fade
+
+        setTimeout(() => {
+            backgroundSlide.style.backgroundImage = `url(${IMAGE_BASE_URL}${backdrops[currentIndex]})`;
+            currentIndex = (currentIndex + 1) % backdrops.length;
+
+            // Remove a classe fade após a troca de imagem
+            setTimeout(() => {
+                backgroundSlide.classList.remove('fade');
+            }, 100);
+        }, 500);
     }
   
     changeSlide();
     setInterval(changeSlide, SLIDE_INTERVAL);
-  }
-  
-  updateBackgroundSlide();
+}
+
+updateBackgroundSlide();

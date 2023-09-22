@@ -53,8 +53,8 @@ body{
 }
 
 .poster-container img{
-    max-width: 30rem;
-    max-height: 50rem;
+    max-width: 25rem;
+    max-height: 100%;
     width: auto;
     height: auto;
     border-radius: 2rem;
@@ -225,11 +225,41 @@ body{
     }
 
     .poster-container img {
+        width: 20rem;
         max-width: 100%;
         height: auto;
     }
 
+    .logo-container img{
+        width: 16rem;
+        max-width: 100%;
+        height: auto;
+    }
+
+    .rating__star {
+        font-size: 1.5rem;
+    }
+
+    .box-review h3{
+        font-size: 1rem;
+    }
+
+    .box-review button{
+        font-size: 0.8rem;
+    }
+    
+    .info-container h3{
+        font-size: 1rem;
+    }
+    .info-container p{
+        font-size: 0.8rem;
+    }
     .poster-container li {
         font-size: 1.5rem;
+    }
+
+    .info-container li{
+        margin: 20px 5px;
+        padding: 5px;
     }
 }

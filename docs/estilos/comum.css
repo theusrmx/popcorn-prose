@@ -27,7 +27,7 @@ body{
 
 .logo-escrito{
     max-width: 100%;
-    height: 60px; 
+    height: 45px; 
     display: block;
     margin: 10px;
     cursor: pointer;
@@ -35,7 +35,7 @@ body{
 
 .logo-mascote{
     max-width: 100%;
-    height: 80px; 
+    height: 65px; 
     display: block;
     margin-left: 10px;
     transition: ease-out 0.3s;
@@ -43,4 +43,15 @@ body{
 
 .logo-mascote:hover{
     transform: scale(1.2);
+}
+
+@media screen and (max-width: 768px) { 
+    .logo-escrito{
+        height: 40px;
+    }
+
+    .logo-mascote{
+        height: 60px;
+    }
+
 }

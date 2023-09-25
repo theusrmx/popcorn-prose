@@ -1,4 +1,4 @@
-function iniciarSlides(apiKey, baseUrl, baseUrlLogo, tempoSlide, elemento, animacao) {
+export function iniciarSlides(apiKey, baseUrl, baseUrlLogo, tempoSlide, elemento, animacao) {
   const IMAGE_BASE_URL = baseUrl;
   const INTERVALO_SLIDE = tempoSlide;
   const LOGO_BASE_URL = baseUrlLogo;
@@ -142,25 +142,28 @@ function iniciarSlides(apiKey, baseUrl, baseUrlLogo, tempoSlide, elemento, anima
     }
   
     // Limpar intervalos anteriores para evitar acumulação
-    clearInterval(interval);
-  
+    clearInterval(INTERVALO_SLIDE);
+    
     if (animacao === 'fade') {
       // Intervalo para a transição dos slides
-      interval = setInterval(mudarSlide, INTERVALO_SLIDE);
+      let interval = setInterval(mudarSlide, INTERVALO_SLIDE);
     } else if (animacao === 'slide') {
       updateCarousel();
       // Intervalo para avançar os slides
       interval = setInterval(INTERVALO_SLIDE);
     }
   };
+  
 }
-
+/*
 const API_KEY = '557439512040e55c35f758f339c8e1d1';
 const BASE_URL = 'https://image.tmdb.org/t/p/original/';
 const BASE_URL_LOGO = 'https://image.tmdb.org/t/p/original/';
 let interval = 5000;
 
+
 const slideShowLogin = iniciarSlides(API_KEY, BASE_URL, 0, interval, 'backgroundSlide', 'fade');
 const slideShowHome = iniciarSlides(API_KEY, BASE_URL, BASE_URL_LOGO, interval, 'carouselExampleSlidesOnly', 'slide');
 slideShowLogin();
 slideShowHome();
+*/

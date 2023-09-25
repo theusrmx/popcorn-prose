@@ -1,5 +1,9 @@
-const apiKey = '557439512040e55c35f758f339c8e1d1';
+import { iniciarSlides } from "./image_slider.js";
 
+const apiKey = '557439512040e55c35f758f339c8e1d1';
+const BASE_URL = 'https://image.tmdb.org/t/p/original/';
+const BASE_URL_LOGO = 'https://image.tmdb.org/t/p/original/';
+let interval = 5000;
 
 // Função para carregar os filmes populares
 function loadPopularMovies() {
@@ -67,9 +71,16 @@ const mensagensAvaliacaoFilmes = [
     //console.log(mensagensAvaliacaoFilmes[indiceAleatorio]);
 }
 
+
+
+
+const slideShowHome = iniciarSlides(apiKey, BASE_URL, BASE_URL_LOGO, interval, 'carouselExampleSlidesOnly', 'slide');
+
+
 // Carregue os filmes populares ao carregar a página
 window.addEventListener('load', () => {
     loadPopularMovies();
     loadPopularSeries();
+    slideShowHome();
     exibirMensagemAleatoria(mensagensAvaliacaoFilmes);
 });

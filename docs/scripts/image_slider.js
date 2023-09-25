@@ -4,6 +4,7 @@ function iniciarSlides(apiKey, baseUrl, baseUrlLogo, tempoSlide, elemento, anima
   const LOGO_BASE_URL = baseUrlLogo;
   const elementoSlide = document.getElementById(elemento);
 
+
   async function buscarFilmesSeriesPopulares() {
     try {
       const recuperarFilmes = await fetch(`https://api.themoviedb.org/3/trending/movie/week?api_key=${apiKey}`);
@@ -88,15 +89,14 @@ function iniciarSlides(apiKey, baseUrl, baseUrlLogo, tempoSlide, elemento, anima
     let currentIndex = 0;
   
     function updateCarousel() {
-      // Limpar itens do carrossel
-      elementoSlide.innerHTML = '';
+        elementoSlide.innerHTML = '';
   
-      // Criar novo carrossel com os itens recuperados
-      backdrops.forEach((image, index) => {
+        
+        backdrops.forEach((image, index) => {
           const carouselItem = document.createElement('div');
           carouselItem.classList.add('carousel-item');
           if (index === 0) {
-              carouselItem.classList.add('active');
+            carouselItem.classList.add('active');
           }
   
           const img = document.createElement('img');
@@ -104,21 +104,19 @@ function iniciarSlides(apiKey, baseUrl, baseUrlLogo, tempoSlide, elemento, anima
           img.src = IMAGE_BASE_URL + image;
           img.alt = 'Slide Image';
   
-          // Criar elemento de imagem para a logo
-          const logoImg = document.createElement('img');
-          logoImg.classList.add('logo-image');
-          logoImg.src = LOGO_BASE_URL + logos[index];
-          logoImg.alt = 'Logo do Filme';
+          carouselItem.appendChild(img);
   
-          // Adicionar a imagem de fundo e a logo ao item do carrossel
-          const imageContainer = document.createElement('div');
-          imageContainer.classList.add('image-container'); // Added a class for styling
-          imageContainer.appendChild(img);
-          imageContainer.appendChild(logoImg);
+          if (animacao === 'slide' && logos[index]) {
+            const logoImg = document.createElement('img');
+            logoImg.classList.add('logo-image');
+            logoImg.src = LOGO_BASE_URL + logos[index];
+            logoImg.alt = 'Logo do Filme';
   
-          carouselItem.appendChild(imageContainer);
+            carouselItem.appendChild(logoImg);
+          }
+  
           elementoSlide.appendChild(carouselItem);
-      });
+        }); 
   }
   
     function mudarSlide() {
@@ -151,9 +149,8 @@ function iniciarSlides(apiKey, baseUrl, baseUrlLogo, tempoSlide, elemento, anima
       interval = setInterval(mudarSlide, INTERVALO_SLIDE);
     } else if (animacao === 'slide') {
       updateCarousel();
-  
       // Intervalo para avançar os slides
-      interval = setInterval(avancarSlide, INTERVALO_SLIDE);
+      interval = setInterval(INTERVALO_SLIDE);
     }
   };
 }
@@ -163,7 +160,7 @@ const BASE_URL = 'https://image.tmdb.org/t/p/original/';
 const BASE_URL_LOGO = 'https://image.tmdb.org/t/p/original/';
 let interval = 5000;
 
-const slideShowLogin = iniciarSlides(API_KEY, BASE_URL, BASE_URL_LOGO, interval, 'backgroundSlide', 'fade');
+const slideShowLogin = iniciarSlides(API_KEY, BASE_URL, 0, interval, 'backgroundSlide', 'fade');
 const slideShowHome = iniciarSlides(API_KEY, BASE_URL, BASE_URL_LOGO, interval, 'carouselExampleSlidesOnly', 'slide');
 slideShowLogin();
 slideShowHome();

@@ -121,7 +121,7 @@ function pesquisarFilmes() {
 
 
 // Adicionar evento de clique ao botão de pesquisa
-const botaoPesquisa = document.querySelector('button');
+const botaoPesquisa = document.getElementById('searchButton');
 botaoPesquisa.addEventListener('click', pesquisarFilmes);
 
 //carrega as funçoes de filmes populares ao carregar a página

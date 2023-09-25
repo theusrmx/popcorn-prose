@@ -50,8 +50,27 @@ function loadPopularSeries(){
     });
 }
 
+
+const mensagensAvaliacaoFilmes = [
+    "A magia do cinema está em sua opinião.",
+    "Sua visão única faz toda a diferença.",
+    "Você é a estrela da sua própria crítica. Brilhe!",
+    "Que tal transformar sua última sessão em palavras?",
+    "A cena é sua!", 
+    "A Força é forte em você.",
+    "Hakuna Matata!"
+];
+  
+  function exibirMensagemAleatoria() {
+    let mensagemElement = document.getElementById('mensagemUser');
+    const indiceAleatorio = Math.floor(Math.random() * mensagensAvaliacaoFilmes.length);
+    mensagemElement.innerHTML = `${mensagensAvaliacaoFilmes[indiceAleatorio]}`
+    //console.log(mensagensAvaliacaoFilmes[indiceAleatorio]);
+}
+
 // Carregue os filmes populares ao carregar a página
 window.addEventListener('load', () => {
     loadPopularMovies();
     loadPopularSeries();
+    exibirMensagemAleatoria(mensagensAvaliacaoFilmes);
 });

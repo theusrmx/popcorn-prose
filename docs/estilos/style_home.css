@@ -6,13 +6,14 @@
   .coluna-esquerda {
     display: flex;
     flex-direction: column;
-    width: 60%;
+    width: 55%;
     padding: 20px;
+    justify-content: center;
+    align-items: center;
 }
 
 .welcome-message{
     color: #fff;
-    margin-left: 30%;
     padding: 10px;
 }
 
@@ -24,12 +25,11 @@
 
 .welcome-message h4{
     font-size: 19px;
-    font-weight: 600;
+    font-weight: 500;
 }
 
 .info-user{
     color: #FFF;
-    margin-left: 30%;
     padding: 10px;
     max-width: fit-content;
 }
@@ -77,6 +77,20 @@
     border-radius: 0 0 0 50px;
 }
 
+.image-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.logo-image {
+    position: absolute;
+    bottom: 10px; 
+    right: 10px; 
+    width: 300px;
+    height: auto;
+    margin: 20px;
+}
+
 /* Estilos para a seção de filmes */
 .popular-movies, .popular-series {
     margin: 20px;
@@ -86,6 +100,8 @@
 .popular-movies h2, .popular-series h2{
     font-weight: 300;
     color: #D83333;
+    font-size: 28px;
+    margin-bottom: 10px;
 }
 /* Estilos para o contêiner de cards de filme */
 .movie-cards, .series-cards {
@@ -146,7 +162,7 @@
   }
   
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 800px){
     .top-banner{
         flex-direction: column-reverse;
     }
@@ -156,6 +172,7 @@
     }
     .coluna-esquerda{
         width: 100%;
+        margin-left: auto;
     }
     .welcome-message h1{
         font-size: 40px;
@@ -173,7 +190,8 @@
     }
 
     .info-user button{
-        width: 127px;
+        width: fit-content;
+        font-size: 14px;
     }
 
     .info-user a{
@@ -186,4 +204,14 @@
         border-radius: 0 0 50px 50px;
     }
 
-  }
+    .logo-image {
+        margin: 10px;
+        width: 200px;
+        height: auto;
+    }
+
+    .popular-movies h2, .popular-series h2{
+        font-size: 24px;
+    }
+
+}

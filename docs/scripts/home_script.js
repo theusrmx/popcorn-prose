@@ -60,8 +60,9 @@ const mensagensAvaliacaoFilmes = [
     "Você é a estrela da sua própria crítica. Brilhe!",
     "Que tal transformar sua última sessão em palavras?",
     "A cena é sua!", 
-    "A Força é forte em você.",
-    "Hakuna Matata!"
+    "A Força é poderosa em você.",
+    "Hakuna Matata!",
+    "Luz, câmera, ação!"
 ];
   
   function exibirMensagemAleatoria() {

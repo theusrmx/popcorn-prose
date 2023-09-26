@@ -3,6 +3,7 @@ export function iniciarSlides(apiKey, baseUrl, baseUrlLogo, tempoSlide, elemento
   const INTERVALO_SLIDE = tempoSlide;
   const LOGO_BASE_URL = baseUrlLogo;
   const elementoSlide = document.getElementById(elemento);
+  let intervalo;
 
 
   async function buscarFilmesSeriesPopulares() {
@@ -119,51 +120,41 @@ export function iniciarSlides(apiKey, baseUrl, baseUrlLogo, tempoSlide, elemento
         }); 
   }
   
-    function mudarSlide() {
-      currentIndex = (currentIndex + 1) % backdrops.length;
+  function mudarSlide() {
+    const proximoIndice = (currentIndex + 1) % backdrops.length;
   
-      // Aplicar transição suave para o efeito fade
-      if (animacao === 'fade') {
+    if (currentIndex === 0) {
+      // Para o primeiro slide, exibir imediatamente sem transição
+      elementoSlide.style.transition = 'none';
+      elementoSlide.style.backgroundImage = `url(${IMAGE_BASE_URL}${backdrops[currentIndex]})`;
+    } else {
+      // A partir do segundo slide, aplicar transição
+      if(animacao === 'fade'){
         elementoSlide.style.transition = 'opacity 0.5s ease-in-out';
         elementoSlide.style.opacity = 0;
-  
-        setTimeout(() => {
-          elementoSlide.style.backgroundImage = `url(${IMAGE_BASE_URL}${backdrops[currentIndex]})`;
-          elementoSlide.style.opacity = 1;
-        }, 500);
-      } else if (animacao === 'slide') {
-        currentIndex = (currentIndex + 1) % backdrops.length;
-        const items = elementoSlide.getElementsByClassName('carousel-item');
-        for (let i = 0; i < items.length; i++) {
-          items[i].classList.remove('active');
-        }
-        items[currentIndex].classList.add('active');
       }
+      
+      
+      setTimeout(() => {
+        elementoSlide.style.backgroundImage = `url(${IMAGE_BASE_URL}${backdrops[currentIndex]})`;
+        elementoSlide.style.opacity = 1;
+      }, 500);
     }
+  
+    currentIndex = proximoIndice;
+  }
   
     // Limpar intervalos anteriores para evitar acumulação
-    clearInterval(INTERVALO_SLIDE);
+    clearInterval(intervalo);
+    elementoSlide.style.backgroundImage = `url(${IMAGE_BASE_URL}${backdrops[currentIndex]})`;
     
     if (animacao === 'fade') {
-      // Intervalo para a transição dos slides
-      let interval = setInterval(mudarSlide, INTERVALO_SLIDE);
+        intervalo = setInterval(mudarSlide, INTERVALO_SLIDE);
     } else if (animacao === 'slide') {
-      updateCarousel();
-      // Intervalo para avançar os slides
-      interval = setInterval(INTERVALO_SLIDE);
+        updateCarousel();
+        intervalo = setInterval(mudarSlide, INTERVALO_SLIDE);
     }
+    
   };
-  
+      
 }
-/*
-const API_KEY = '557439512040e55c35f758f339c8e1d1';
-const BASE_URL = 'https://image.tmdb.org/t/p/original/';
-const BASE_URL_LOGO = 'https://image.tmdb.org/t/p/original/';
-let interval = 5000;
-
-
-const slideShowLogin = iniciarSlides(API_KEY, BASE_URL, 0, interval, 'backgroundSlide', 'fade');
-const slideShowHome = iniciarSlides(API_KEY, BASE_URL, BASE_URL_LOGO, interval, 'carouselExampleSlidesOnly', 'slide');
-slideShowLogin();
-slideShowHome();
-*/

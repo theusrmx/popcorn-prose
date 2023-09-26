@@ -68,13 +68,14 @@
 
 .carousel-inner .carousel-item img {
     max-width: 100%;
-    height: auto;
+    max-height: auto;
 }
   
 .carousel {
     flex: 1;
     overflow: hidden;
     border-radius: 0 0 0 50px;
+    height: fit-content;
 }
 
 .image-container {
@@ -161,8 +162,8 @@
     background-color: #555; /* Cor do polegar quando o mouse está sobre ele */
   }
   
-
-  @media screen and (max-width: 800px){
+  /*Celulares e tablets*/
+  @media screen and (max-width: 820px){
     .top-banner{
         flex-direction: column-reverse;
     }
@@ -214,4 +215,5 @@
         font-size: 24px;
     }
 
+    
 }

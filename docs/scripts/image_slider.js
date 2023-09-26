@@ -101,7 +101,7 @@ export function iniciarSlides(apiKey, baseUrl, baseUrlLogo, tempoSlide, elemento
           }
   
           const img = document.createElement('img');
-          img.classList.add('d-block', 'w-100');
+          img.classList.add('d-block', 'img-fluid');
           img.src = IMAGE_BASE_URL + image;
           img.alt = 'Slide Image';
   

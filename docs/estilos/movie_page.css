@@ -42,12 +42,16 @@
     display: inline-block;
     margin: 10px;
     padding: 10px;
-    font-size: 2rem;
+}
+
+.poster-container i{
+    font-size: 2em;
+    margin-bottom: 12px;
 }
 
 .poster-container p{
     color: #ffffff;
-    font-size: 16px;
+    font-size: 1em;
 }
 
 .logo-container {
@@ -94,7 +98,7 @@
     height: 176px;
     width: 100%;
     max-width: 100%;
-    font-size: 16px;
+    font-size: 1em;
     border-width: 1px;
     border-color: #d83333;
     color: #ffffff;
@@ -173,20 +177,21 @@
     display: inline-block;
     margin: 10px;
     padding: 10px;
-    font-size: 2rem;
 }
 
 .info-container i{
     color: var(--vermelho-principal);
+    font-size: 2em;
+    margin-bottom: 12px;
 }
 
 
 .info-container p{
-    font-size: 16px;
+    font-size: 1em;
 }
 
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 870px) {
     .container-movie {
         flex-direction: column;
     }
@@ -196,41 +201,37 @@
     }
 
     .poster-container img {
-        width: 20rem;
+        width: 30em;
         max-width: 100%;
         height: auto;
     }
+    
+    .poster-container li{
+        font-size: 1em;
+    }
 
     .logo-container img{
-        width: 16rem;
+        width: 20em;
         max-width: 100%;
         height: auto;
     }
 
     .rating__star {
-        font-size: 1.5rem;
+        font-size: 1em;
     }
 
     .box-review h3{
-        font-size: 1rem;
+        font-size: 1em;
     }
 
     .box-review button{
-        font-size: 0.8rem;
+        font-size: 0.8em;
     }
     
     .info-container h3{
-        font-size: 1rem;
+        font-size: 1.5em;
     }
-    .info-container p{
-        font-size: 0.8rem;
-    }
-    .poster-container li {
-        font-size: 1.5rem;
-    }
+    
+    
 
-    .info-container li{
-        margin: 20px 5px;
-        padding: 5px;
-    }
 }

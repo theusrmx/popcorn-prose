@@ -5,52 +5,40 @@ const BASE_URL = 'https://image.tmdb.org/t/p/original/';
 const BASE_URL_LOGO = 'https://image.tmdb.org/t/p/original/';
 let interval = 5000;
 
-// Função para carregar os filmes populares
-function loadPopularMovies() {
-    fetch(`https://api.themoviedb.org/3/trending/movie/day?api_key=${apiKey}&language=pt-BR`)
+//Função para carrregar conteudo popular de acordo com o paramento TIPO MIDIA - TV OU MOVIE
+function carregarConteudoPopular(tipoMidia, elementoHTML) {
+    const midiaRequisitada = tipoMidia;
+    const elemento = document.querySelector(elementoHTML);
+
+    fetch(`https://api.themoviedb.org/3/trending/${midiaRequisitada}/day?api_key=${apiKey}&language=pt-BR`)
         .then(response => response.json())
         .then(data => {
-            const popularMovies = data.results;
+            const midiaPopular = data.results;
 
-            popularMovies.forEach(movie => {
-                const movieCard = document.createElement('div');
-                movieCard.classList.add('movie-card');
-            
-                movieCard.innerHTML = `
-                    <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">
-                    <p class="movie-title">${movie.title}</p>
+            midiaPopular.forEach(midia => {
+                const idMidia = midia.id;
+                const nomeMidia = midiaRequisitada === 'movie' ? midia.title : midia.name;
+                const urlPoster = midia.poster_path;
+
+                const midiaCard = document.createElement('div');
+                midiaCard.classList.add('movie-card');
+
+                midiaCard.innerHTML = `
+                    <img src="https://image.tmdb.org/t/p/w500${urlPoster}" alt="${nomeMidia}">
+                    <p class="movie-title">${nomeMidia}</p>
                 `;
-            
-                const movieCardsContainer = document.querySelector('.movie-cards');
-                movieCardsContainer.appendChild(movieCard);
+
+                // Adicionar evento de clique para redirecionar para a página de detalhes
+                midiaCard.addEventListener('click', () => {
+                    window.location.href = `movie_page.html?id=${idMidia}&mediaType=${midiaRequisitada}`;
+                });
+
+                elemento.appendChild(midiaCard);
             });
         })
         .catch(error => {
-            console.error('Erro ao carregar filmes populares:', error);
+            console.error(`Erro ao carregar mídias populares (${tipoMidia}):`, error);
         });
-}
-
-function loadPopularSeries(){
-    fetch(`https://api.themoviedb.org/3/trending/tv/day?api_key=${apiKey}&language=pt-BR`)
-    .then(response => response.json())
-    .then(data => {
-        const popularSeries = data.results;
-        
-
-        popularSeries.forEach(tv => {
-            const seriesCards = document.createElement('div');
-            seriesCards.classList.add('movie-card');
-            seriesCards.innerHTML = `
-            <img src="https://image.tmdb.org/t/p/w500${tv.poster_path}" alt="${tv.name}">
-            <p class="movie-title">${tv.name}</p>
-            `;
-            const seriesCardsContainer = document.querySelector('.series-cards');
-            seriesCardsContainer.appendChild(seriesCards);
-        });
-    })
-    .catch(error => {
-        console.error('Erro ao carregar filmes populares:', error);
-    });
 }
 
 
@@ -73,15 +61,12 @@ const mensagensAvaliacaoFilmes = [
 }
 
 
-
-
 const slideShowHome = iniciarSlides(apiKey, BASE_URL, BASE_URL_LOGO, interval, 'carouselExampleSlidesOnly', 'slide');
-
 
 // Carregue os filmes populares ao carregar a página
 window.addEventListener('load', () => {
-    loadPopularMovies();
-    loadPopularSeries();
+    carregarConteudoPopular('movie', '.movie-cards');
+    carregarConteudoPopular('tv', '.series-cards')
     slideShowHome();
     exibirMensagemAleatoria(mensagensAvaliacaoFilmes);
 });

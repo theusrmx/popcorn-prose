@@ -1,12 +1,20 @@
 .top-banner {
     display: flex;
-    justify-content: space-between;
+    flex-direction: row;
+}
+
+  .coluna-esquerda {
+    display: flex;
+    flex-direction: column;
+    width: 55%;
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
 }
 
 .welcome-message{
     color: #fff;
-    margin: 50px;
-    
+    padding: 10px;
 }
 
 .welcome-message h1{
@@ -15,52 +23,87 @@
     font-weight: 700;
 }
 
-
 .welcome-message h4{
     font-size: 19px;
-    font-weight: 600;
-    
+    font-weight: 500;
 }
 
 .info-user{
     color: #FFF;
     padding: 10px;
-    font-size: 24px;
     max-width: fit-content;
-    margin: 50px;
 }
 
 .info-user h4{
     font-weight: 300;
+    font-size: 24px;
 }
 
 .info-user i{
-    padding-right: 15px;
+    font-size: 30px;
+    padding: 5px;
 }
 
-.info-user button, .info-user a{
+.info-user button{
     background-color: #147a04;
     border-radius: 18px;
     color: #fff;
-    padding: 10px;
+    padding: 15px;
+    margin-top: 15px;
     border: none;
     cursor: pointer;
     width: 150px;
     text-decoration: none;
+    font-size: 14px;
 }
 
-.my-movies h2, .my-series h2{
+.info-user button i{
+    font-size: 14px;
+}
 
-    font-weight: 300;
-    color: #D83333;
+.info-user a{
+    text-decoration: none;
+    color: #fff;
+}
+
+.carousel-inner .carousel-item img {
+    max-width: 100%;
+    max-height: auto;
+}
+  
+.carousel {
+    flex: 1;
+    overflow: hidden;
+    border-radius: 0 0 0 50px;
+    height: fit-content;
+}
+
+.image-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.logo-image {
+    position: absolute;
+    bottom: 10px; 
+    right: 10px; 
+    width: 300px;
+    height: auto;
+    margin: 20px;
 }
 
 /* Estilos para a seção de filmes */
-.my-movies, .my-series {
+.popular-movies, .popular-series {
     margin: 20px;
     padding: 10px;
 }
 
+.popular-movies h2, .popular-series h2{
+    font-weight: 300;
+    color: #D83333;
+    font-size: 28px;
+    margin-bottom: 10px;
+}
 /* Estilos para o contêiner de cards de filme */
 .movie-cards, .series-cards {
     display: flex;
@@ -76,9 +119,7 @@
     margin-right: 20px; /* Espaço entre os cards */
     overflow: hidden; /* Evita que o conteúdo transborde (opcional) */
     text-align: center; /* Centraliza o conteúdo horizontalmente */
-    position: relative; /* Para posicionar o título dentro do card */
-    
-    
+    position: relative; /* Para posicionar o título dentro do card */ 
 }
 
 /* Estilos para a imagem dentro do card */
@@ -121,24 +162,18 @@
     background-color: #555; /* Cor do polegar quando o mouse está sobre ele */
   }
   
-
-  @media screen and (max-width: 768px) {
+  /*Celulares e tablets*/
+  @media screen and (max-width: 820px){
     .top-banner{
-        flex-direction: column;
-        align-items: center;
+        flex-direction: column-reverse;
     }
-
-    .logo-escrito{
-        height: 50px; 
-    }
-    
-    .logo-mascote{
-        height: 60px; 
-    }
-    
 
     .welcome-message, .info-user{
        margin: 15px;
+    }
+    .coluna-esquerda{
+        width: 100%;
+        margin-left: auto;
     }
     .welcome-message h1{
         font-size: 40px;
@@ -148,16 +183,37 @@
         font-size: 15px;
     }
 
+    .info-user{
+        margin: auto;
+    }
     .info-user h4{
         font-size: 20px;
     }
 
     .info-user button{
-        width: 127px;
+        width: fit-content;
+        font-size: 14px;
     }
 
     .info-user a{
         padding: 5px;
     }
 
-  }
+    .carousel {
+        flex: 1;
+        overflow: hidden;
+        border-radius: 0 0 50px 50px;
+    }
+
+    .logo-image {
+        margin: 10px;
+        width: 200px;
+        height: auto;
+    }
+
+    .popular-movies h2, .popular-series h2{
+        font-size: 24px;
+    }
+
+    
+}

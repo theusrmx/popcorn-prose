@@ -3,32 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href=".\estilos\comum.css">
-    <link rel="stylesheet" href=".\estilos\style_home.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="../docs/estilos/comum.css">
+    <link rel="stylesheet" href="../docs/estilos/style_home.css">
     <script src="https://kit.fontawesome.com/23fd127124.js" crossorigin="anonymous"></script>
     <title>Popcorn Prose - Home</title>
 </head>
 <body>
     <header class="popcorn-nav">
-        <img src=".\assets\popcorn_mascote.png" class="logo-mascote" alt="Pop & Corn">
         <a href="index.html">
-            <img src=".\assets\pcprose_logo.png" class="logo-escrito" alt="Popcorn Prose logo">
+            <h1>Popcorn Prose</h1>
+        </a>
+
+        <!--a href="login.html">
+            <button class="login-btn">Login</button>
+        </a-->
+        <a href="">
+            <img src="https://avatars.githubusercontent.com/u/80594518?v=4" class="foto-perfil">
         </a>
     </header>
     
+    
+
+    <!--div class="slideShow-home" id="slideShow-home"></div-->
+    
     <section class="top-banner">
-        <div class="welcome-message">
+        <div class="coluna-esquerda">
+          <div class="welcome-message">
             <h1>Bem vindo, John!</h1>
-            <h4>preparado para mais uma avaliação?</h4>
-        </div>
-
-        <div class="info-user">
-            <h4><i class="fa-solid fa-clapperboard"></i> 23 filmes</h4>
+            <h4 id="mensagemUser"></h4>
+          </div>
+      
+          <div class="info-user">
+            <h4><i class="fa-solid fa-clapperboard"></i>23 filmes</h4>
             <h4><i class="fa-solid fa-tv"></i>10 séries</h4>
-            <button class="btn-newreview"><a href="search.html">+ novo review</a></button>
+            <button class="btn-newreview">
+              <a href="search.html">
+                <i class="fa-solid fa-magnifying-glass"></i>Buscar filme
+              </a>
+            </button>
+          </div>
         </div>
-    </section>
-
+      
+        <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <!-- Conteúdo do carrossel aqui -->
+          </div>
+        </div>
+      </section>
     
         <section class="popular-movies">
             <div>
@@ -46,6 +68,11 @@
             </div>
        
         </section>
-    
+
+        
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script type="module" src="../docs/scripts/home_script.js"></script>
+    <script src="../docs/scripts/image_slider.js"></script>
 </body>
 </html>

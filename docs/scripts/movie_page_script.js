@@ -88,7 +88,7 @@ if (!movieId) {
         
         
         const minhaImagem = document.getElementById('movie-poster');
-        minhaImagem.crossOrigin = 'Anonymous';
+        image.setAttribute('crossOrigin','anonymous');
         minhaImagem.src = googleProxyURL + encodeURIComponent(posterPath);
         
         document.getElementById('movie-details-title').textContent = `${title} - Popcorn Prose`;

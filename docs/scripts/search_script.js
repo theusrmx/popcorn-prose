@@ -1,5 +1,5 @@
 const apiKey = '557439512040e55c35f758f339c8e1d1';
-const searchResultsDiv = document.querySelector('.search-results');
+const searchResultsDiv = document.getElementById('search-results');
 
 function criarCard(midia, titulo, ano, resumo, id) {
     const cartaoDiv = document.createElement('div');
@@ -25,6 +25,8 @@ function criarCard(midia, titulo, ano, resumo, id) {
 
 //Function para carregar os filmes populares do dia na API.
 function carregarFilmesPopulares() {
+    const searchHeading = document.getElementById('search-header');
+    searchHeading.innerHTML = `Filmes e séries populares`;
     //Faz a requição para a API
     fetch(`https://api.themoviedb.org/3/trending/movie/day?api_key=${apiKey}&language=pt-BR`)
         .then(response => response.json())
@@ -67,6 +69,12 @@ function pesquisarFilmes() {
     const entradaPesquisa = document.querySelector('input[type="text"]');
     const consultaPesquisa = entradaPesquisa.value;
 
+    // Limpar os resultados de pesquisa anteriores
+    searchResultsDiv.innerHTML = "";
+    const searchHeading = document.getElementById('search-header');
+    searchHeading.innerHTML = `Buscando por: <span>${consultaPesquisa}<span>`;
+
+
     if (consultaPesquisa.trim() === "") {
         // Se a consulta de pesquisa estiver em branco, carregue os filmes populares em vez disso após apagar todo o conteudo (caso tenha algo)
         searchResultsDiv.innerHTML = "";
@@ -75,13 +83,16 @@ function pesquisarFilmes() {
         return;
     }
 
-    // Limpar os resultados de pesquisa anteriores
-    searchResultsDiv.innerHTML = "";
+    
 
+    
     // Fazer uma solicitação à API TMDB para pesquisa de filmes
     fetch(`https://api.themoviedb.org/3/search/multi?api_key=${apiKey}&query=${consultaPesquisa}&language=pt-BR`)
         .then(response => response.json())
         .then(data => {
+
+            
+
             const resultadosPesquisa = data.results;
             resultadosPesquisa.forEach(filme => {
                let tipoConteudo = filme.media_type;

@@ -22,8 +22,8 @@ if (!movieId) {
     console.error('ID do filme ou série não encontrado na URL.');
 }
 
-  
-  fetch(`https://api.themoviedb.org/3/${endpoint}/${movieId}?api_key=${apiKey}&language=pt-BR`)
+function montarPagina(){
+    fetch(`https://api.themoviedb.org/3/${endpoint}/${movieId}?api_key=${apiKey}&language=pt-BR`)
     .then(response => response.json())
     .then(data => {
         // Exiba os detalhes do filme ou série como desejar
@@ -43,7 +43,7 @@ if (!movieId) {
         }
 
         const posterPath = data.poster_path ? `https://image.tmdb.org/t/p/${posterResolution}/${data.poster_path}` : '';
-        let googleProxyURL = 'https://images1-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&refresh=2592000&url='; //utliziando um server proxy para evitar problemas com crossorigin
+        //let googleProxyURL = 'https://images1-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&refresh=2592000&url='; //utliziando um server proxy para evitar problemas com crossorigin
         
         const likes = data.vote_count; // Número de votos
         const views = data.popularity; // Popularidade (visualizações)
@@ -80,6 +80,7 @@ if (!movieId) {
             logoImg.src = `https://image.tmdb.org/t/p/w300/${logoEn.file_path}`
           } else {
             document.getElementById('movie-title').textContent = title;
+            logoImg.alt = '';
           }
 
           
@@ -95,6 +96,7 @@ if (!movieId) {
         document.getElementById('views').textContent = formatNumber(views);
         document.getElementById('likes').textContent = formatNumber(likes);
         document.getElementById('sinopse').textContent = overview;
+        
         if(duration){
           document.getElementById('duration').textContent = `${duration} min`;
         }else{
@@ -111,6 +113,8 @@ if (!movieId) {
         console.error('Erro ao carregar os detalhes do filme ou série:', error);
     });
 
+}
+  
 
 //formatar numeros grandes
 function formatNumber(number) {
@@ -171,3 +175,7 @@ function executeRating(stars) {
   });
 }
 executeRating(ratingStars);
+
+window.addEventListener('load', () => {
+  montarPagina();
+});

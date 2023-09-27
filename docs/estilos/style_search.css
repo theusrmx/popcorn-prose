@@ -16,6 +16,7 @@
   padding: 10px;
   width: 400px;
   height: auto;
+  color: #000;
 
   outline: none;
 }
@@ -44,6 +45,17 @@
   height: auto;
   margin-left: auto;
   margin-right: auto;
+}
+
+#search-header{
+  margin: 20px;
+  font-size: 24px;
+  font-weight: 400;
+}
+
+#search-header span{
+  color: var(--vermelho-principal);
+  
 }
 
 .card-result {

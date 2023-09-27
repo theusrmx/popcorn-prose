@@ -64,7 +64,7 @@ function montarPagina(){
         //Manipulação DOM para inserir elementos da API na tela
         const minhaImagem = document.getElementById('movie-poster');
         image.setAttribute('crossOrigin','anonymous');
-        minhaImagem.src = googleProxyURL + encodeURIComponent(posterPath);
+        minhaImagem.src = posterPath;
         
         document.getElementById('movie-details-title').textContent = `${tituloFilme} - Popcorn Prose`; //Definiç~~ao title page de aordo com o nome do filme
         document.getElementById('views').textContent = formatNumber(viewsFilme);

@@ -20,7 +20,7 @@
             <button class="login-btn">Login</button>
         </a-->
         <a href="user.html">
-            <img src="https://avatars.githubusercontent.com/u/80594518?v=4" class="foto-perfil">
+            <img src="https://avatars.githubusercontent.com/u/80594518?v=4" class="foto-perfil" alt="Foto do usuário">
         </a>
     </header>
   
@@ -30,17 +30,15 @@
         <div class="coluna-esquerda">
           <div class="welcome-message">
             <h1>Bem vindo, John!</h1>
-            <h4 id="mensagemUser"></h4>
+            <h4 id="mensagemUser"><!--Mensagem dinamica via JS-->A magia do cinema está em sua opinião.</h4>
           </div>
       
           <div class="info-user">
             <h4><i class="fa-solid fa-clapperboard"></i>23 filmes</h4>
             <h4><i class="fa-solid fa-tv"></i>10 séries</h4>
-            <button class="btn-newreview">
-              <a href="search.html">
-                <i class="fa-solid fa-magnifying-glass"></i>Buscar filme
-              </a>
-            </button>
+            <a href="search.html" class="btn-newreview">
+              <i class="fa-solid fa-magnifying-glass"></i>Buscar filme
+            </a>
           </div>
         </div>
       
@@ -54,6 +52,7 @@
         <section class="popular-movies">
             <div>
                 <h2>Filmes populares</h2>
+                <!--Conteudo exibido a partir de pesquisa da api JS-->
                 <div class="movie-cards"></div>
             </div>
         </section>
@@ -63,6 +62,7 @@
         <section class="popular-series">
             <div>
                 <h2>Séries populares</h2>
+                <!--Conteudo exibido a partir de pesquisa da api JS-->
                 <div class="series-cards"></div>
             </div>
        

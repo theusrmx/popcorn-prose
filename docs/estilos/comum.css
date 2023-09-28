@@ -62,7 +62,7 @@ body{
 
 /* Estilo para o contêiner que contém a barra de rolagem */
 ::-webkit-scrollbar {
-    width: 10px; /* Largura da barra de rolagem */
+    width: 2px;    
     height: 5px; /* Altura da barra de rolagem */
     background-color: transparent; /* Fundo transparente para o contêiner da barra de rolagem */
     padding: 10px;

@@ -139,29 +139,6 @@
     margin-bottom: 15px;
 }
 
-/* Estilo para o contêiner que contém a barra de rolagem */
-::-webkit-scrollbar {
-    width: 10px; /* Largura da barra de rolagem */
-    background-color: transparent; /* Fundo transparente para o contêiner da barra de rolagem */
-    padding: 10px;
-  }
-  
-  /* Estilo para o trilho (track) da barra de rolagem */
-  ::-webkit-scrollbar-track {
-    background-color: transparent; /* Fundo transparente para o trilho */
-  }
-  
-  /* Estilo para o polegar (thumb) da barra de rolagem */
-  ::-webkit-scrollbar-thumb {
-    background-color: #888; /* Cor do polegar */
-    border-radius: 5px; /* Borda arredondada do polegar */
-  }
-  
-  /* Estilo quando o usuário passa o mouse sobre a barra de rolagem */
-  ::-webkit-scrollbar-thumb:hover {
-    background-color: #555; /* Cor do polegar quando o mouse está sobre ele */
-  }
-  
   /*Celulares e tablets*/
   @media screen and (max-width: 820px){
     .top-banner{

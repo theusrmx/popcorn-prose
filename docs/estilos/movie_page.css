@@ -24,11 +24,11 @@
 }
 
 .poster-container img{
-    max-width: 25rem;
+    max-width: 30em;
     max-height: 100%;
     width: auto;
     height: auto;
-    border-radius: 2rem;
+    border-radius: 2em;
     
 }
 

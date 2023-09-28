@@ -1,0 +1,44 @@
+.usuario_icone{
+    font-size: 200px;
+}
+
+.usuario h3{
+    font-size: 25px;
+    font-weight: 400;
+}
+.imagem_e_texto{
+    display:flex;
+    margin: 40px;
+    flex-direction: inherit;
+}
+
+.usuario{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;  
+}
+
+.trofeu{
+    font-size: 50px;
+}
+
+.mascote_big{
+    width: 370px;
+    height: auto;
+}
+
+.minhas_listas {
+    display: flex;
+}
+
+.avaliaçoes, .desejos {
+    flex: 1;
+    padding: 20px;
+    margin: 10px;
+}
+
+.poster{
+    width: 93px;
+    height: auto;
+
+}

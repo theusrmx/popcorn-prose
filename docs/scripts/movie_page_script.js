@@ -37,11 +37,11 @@ function montarPagina(){
         
           if (logoPt) {
             document.getElementById('movie-title').textContent = '';
-            logoImg.src = `https://image.tmdb.org/t/p/w300/${logoPt.file_path}`;
+            logoImg.src = `https://image.tmdb.org/t/p/w500/${logoPt.file_path}`;
           } else if(logoEn) {
             // Se não encontrar uma logo em pt, exibir logo padrão (english)
             document.getElementById('movie-title').textContent = '';
-            logoImg.src = `https://image.tmdb.org/t/p/w300/${logoEn.file_path}`
+            logoImg.src = `https://image.tmdb.org/t/p/w500/${logoEn.file_path}`
           } else {
             document.getElementById('movie-title').textContent = tituloFilme;
             logoImg.alt = '';

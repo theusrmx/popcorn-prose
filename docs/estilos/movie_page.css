@@ -33,15 +33,16 @@
 }
 
 .poster-container ul {
-    list-style: none;
-    text-align: center;
-    padding: 0; 
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
 }
 
 .poster-container li {
-    display: inline-block;
-    margin: 10px;
-    padding: 10px;
+    margin: 20px;
+    max-width: 60px;
 }
 
 .poster-container i{
@@ -52,6 +53,10 @@
 .poster-container p{
     color: #ffffff;
     font-size: 1em;
+}
+
+.icon-lista{
+    word-wrap: break-word;
 }
 
 .logo-container {

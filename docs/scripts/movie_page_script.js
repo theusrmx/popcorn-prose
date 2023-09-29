@@ -93,8 +93,6 @@ function montarPagina(){
 }
 
 
-  
-
 //formatar numeros grandes
 function formatNumber(number) {
     if (number < 1000) {
@@ -106,6 +104,23 @@ function formatNumber(number) {
     }
 }
 
+function toggleListItem(item) {
+  // Toggle da classe 'selected' para mudar a cor de fundo
+  item.classList.toggle('selected');
+
+  // Altere o texto de acordo com a presença da classe 'selected'
+  const pElement = item.querySelector('#my-list');
+  const iconElement = item.querySelector('i');
+  if (item.classList.contains('selected')) {
+    iconElement.classList.remove('fa-plus');
+    iconElement.classList.add('fa-check');
+    pElement.textContent = 'Na Minha Lista';
+  } else {
+    iconElement.classList.remove('fa-check');
+    iconElement.classList.add('fa-plus');
+    pElement.textContent = 'Minha Lista';
+  }
+}
 
 
 const image = document.getElementById('movie-poster');

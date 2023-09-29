@@ -29,6 +29,7 @@
             <div class="poster-container">
                 <img src="" id="movie-poster" alt="poster">
                 <ul>
+
                     <li>
                       <i class="fa-solid fa-star" style="color: rgb(241, 241, 13);"></i>
                       <p id="rating"></p>
@@ -38,10 +39,17 @@
                       <i class="fa-solid fa-eye" style="color: rgb(2, 207, 2);"></i>
                       <p id="views"></p>
                     </li>
+
                     <li>
                       <i class="fa-solid fa-heart" style="color: rgb(255, 81, 81);"></i>
                       <p id="likes"></p>
                     </li>
+
+                    <li onclick="toggleListItem(this)">
+                      <i class="fa-solid fa-plus icon-lista" style="color: rgb(4, 110, 209);"></i>
+                      <p id="my-list">Minha Lista</p>
+                    </li>
+                    
                   </ul>
             </div>
         </div>

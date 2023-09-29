@@ -1,15 +1,15 @@
 @charset "UTF-8";
-@import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+@font-face {
+    font-family:'MADNESS_HYPERACTIVE';
+    src: url('MADNESS_HYPERACTIVE.TTF') format('truetype');
+}
 
 :root {
     --vermelho-principal: #d83333;
     --verde-botoes: #147a04;
 }
 
-
 * {
-    overflow: hidden;
     font-family: 'Poppins', sans-serif;
     padding: 0;
     margin: 0;
@@ -17,8 +17,8 @@
 }
 
 body, html {
-    color: white;
-    background-color: #dd3030;
+    color: #fff;
+    background-color: #1e1e1e;
     height: 100vh;
     width: 100vw;
 }
@@ -27,63 +27,61 @@ main {
     position: relative;
     height: 100vh;
     width: 100vw;
+    display: flex;
 }
 
 section#login {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    overflow: hidden;
-
-    background-color: black;
-    width: 250px;
-    height: 515px;
-    border-radius: 20px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.450);
-
-    transition: width .3s, height .3s;
-    transition-timing-function: ease;
-    transform: translate(-50%, -50%);
-}
-
-section#login > div#imagem {
-    display: block;
-    /*background: #d83333 url('https://image.tmdb.org/t/p/original//1syW9SNna38rSl9fnXwc9fP7POW.jpg') no-repeat;*/
-    background-size: cover;
-    background-position: center;
-    height: 200px;
-}
-
-section#login > div#formulario {
-    display: block;
-    padding: 10px;
-}
-
-div#formulario > h1 {
-    text-align: center;
-    margin-bottom: 10px;
-}
-
-div#formulario > p {
-    font-size: 0.8em;
-}
-
-form > div.campo {
-    background-color: #d83333;
-    border: 2px solid #d83333;
-    display: block;
+    display: flex;
     width: 100%;
-    height: 40px;
+    height: 100%;
+}
+
+a.go-home{
+    text-decoration: none;
+}
+
+
+
+h1.nome-site{
+    color: var(--vermelho-principal);
+    font-family: 'MADNESS_HYPERACTIVE';
+    font-weight: 400;
+    font-size: 80px;
+    text-align: center;
+}
+
+
+#formulario {
+    flex: 0.3;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+}
+
+#imagem {
+    flex: 1;
+    background-size: cover;
+}
+
+div.campo {
+    border: 2px solid var(--vermelho-principal);
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 70px;
     border-radius: 8px;
-    margin: 5px 0px;
+    margin: 10px 0px;
+    position: relative;
 }
 
 div.campo > label {
-    display: none;
+    display: block;
+    font-size: 1em;
 }
 
 div.campo > i {
-    color: #000;
+    color: #fff;
     font-size: 2em;
     width: 40px;
     padding: 5px;
@@ -91,34 +89,33 @@ div.campo > i {
 
 div.campo > input {
     background-color: #000;
+    color: #fff;
     font-size: 1em;
-    width: calc(100% - 45px);
-    height: 100%;
+    flex: 1;
     border: 0px;
     border-radius: 8px;
-    padding: 4px;
-    transform: translateY(-12px);
-}
-
-div.campo > input:focus-within {
-    background-color: white;
-    border: none;
+    padding: 20px 15px;
+    margin: 5px;
+    outline: none;
 }
 
 form > input[type=submit] {
     display: block;
+    text-align: center;
     font-size: 1em;
     width: 100%;
-    height: 40px;
-    background-color: #1ea808;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+    height: 50px;
+    line-height: 40px;
+    background-color: var(--vermelho-principal);
+    color: #fff;
+    border: 1px solid var(--vermelho-principal);
+    border-radius: 8px;
+    text-decoration: none;
+    margin-top: 10px;
 }
 
 form > input[type=submit]:hover {
-    background-color: #147a04;
+    cursor: pointer;
 }
 
 form > a.botao {
@@ -126,46 +123,78 @@ form > a.botao {
     text-align: center;
     font-size: 1em;
     width: 100%;
-    height: 40px;
-    padding-top: 5px;
-    margin-top: 5px;
-    background-color: white;
-    color: #2d6462;
-    border: 1px solid #49a09d;
-    border-radius: 7px;
+    height: 50px;
+    line-height: 50px;
+    background-color: #fff;
+    color: var(--vermelho-principal);
+    border: 1px solid var(--vermelho-principal);
+    border-radius: 8px;
     text-decoration: none;
+    margin-top: 10px;
 }
 
 form > a.botao:hover {
     background-color: #6cd3cf;
 }
 
-.background-slide::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(30, 30, 30, 80%); /* Cor cinza com 50% de transparência */
+@media (max-width: 768px) {
+    #login {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #imagem{
+        display: none;
+    }
+
+    div.campo {
+        height: 50px;
+    }
+    
+    div.campo > i {
+        font-size: 1.2em;
+    }
+
+    div.campo > input {
+        font-size: 1em;
+        padding: 12px 15px;
+    }
 }
 
-.background-slide {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out; 
-    position: relative;
-    opacity: 1; 
-    transform: scale(1);
-}
+@media (min-width: 769px) and (max-width: 1024px) {
+    #login {
+        flex-direction: column; /* Adjust layout for tablets */
+        align-items: center;
+    }
 
-.background-slide.fade {
-    opacity: 0; 
-    transform: scale(1.1); 
+    #imagem {
+        display: block;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        width: 100%; /* Occupy full width */
+        height: auto; /* Maintain aspect ratio */
+    }
+
+    #formulario {
+        width: 100%; /* Occupy full width */
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
+    div.campo {
+        height: 50px; /* Adjust height as needed */
+    }
+
+    div.campo > i {
+        font-size: 1.2em;
+    }
+
+    div.campo > input {
+        font-size: 1em;
+        padding: 12px 15px;
+        width: calc(100% - 40px);
+        box-sizing: border-box;
+    }
 }

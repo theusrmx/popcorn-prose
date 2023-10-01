@@ -137,6 +137,16 @@ form > a.botao:hover {
     background-color: #6cd3cf;
 }
 
+.cadastro-a{
+    font-size: 1rem;
+    margin-top: 10px;
+}
+
+.cadastro-a a{
+    color: var(--vermelho-principal);
+    text-decoration: underline;
+}
+
 @media (max-width: 768px) {
     #login {
         flex-direction: column;
@@ -162,7 +172,7 @@ form > a.botao:hover {
     }
 }
 
-@media (min-width: 769px) and (max-width: 1024px) {
+@media (min-width: 768px) and (max-width: 1024px) {
     #login {
         flex-direction: column; 
         align-items: center;

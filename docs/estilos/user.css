@@ -21,8 +21,9 @@
 
 .foto_perfil_usuario {
     width: 250px;
-    height: 250px;
+    height: auto;
     border-radius: 50%;
+    margin: 20px;
 }
 
 .usuario {
@@ -33,7 +34,7 @@
 }
 
 .usuario h1 {
-    font-size: 1.8rem;
+    font-size: 3rem;
     margin: 0;
 }
 
@@ -53,8 +54,9 @@
 }
 
 .mascote_big{
-    width: 450px;
+    width: 250px;
     height: auto;
+    margin: 20px;
 }
 
 .minhas_listas {
@@ -64,7 +66,7 @@
 .avaliacoes,
 .desejos {
     flex: 1;
-    padding: 20px;
+    padding: 40px;
 }
 
 .card-avaliacao{
@@ -151,6 +153,10 @@
     width: 186px;
     height: 278px;
     border-radius: 10px;
+}
+
+.cadastro-a p{
+    font-size: 5rem;
 }
 
 @media screen and (max-width: 768px) {

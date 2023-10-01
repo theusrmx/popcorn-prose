@@ -3,95 +3,113 @@
     --verde-botoes: #147a04;
 }
 
+.titulo{
+    width: fit-content;
+    margin: 40px;
+}
 .titulo h1{
-    font-size: 50px;
-    margin-left: 20px;
+    font-size: 3rem;
 }
 
-.foto_perfil_usuario{
+.imagem_e_texto {
+    display: flex;
+    margin: 40px;
+    padding: 20px;
+    border-bottom: 2px solid red;
+    align-items: center;
+}
+
+.foto_perfil_usuario {
     width: 250px;
     height: 250px;
     border-radius: 50%;
 }
 
-.usuario h3{
-    font-size: 30px;
-    font-weight: 400px;
-    margin-left: 25px;
-}
-
-.usuario h1{
-    margin-left: 25px;
-    font-size: 50px;
-}
-.imagem_e_texto{
-    display:flex;
-    margin: 40px;
-    flex-direction: inherit;
-    border-bottom: 2px solid red;
-}
-
-.usuario{
-    display:flex;
+.usuario {
+    display: flex;
     flex-direction: column;
-    justify-content: center;  
+    justify-content: center;
+    margin-left: 20px;
 }
 
-.trofeu{
-    font-size: 50px;
+.usuario h1 {
+    font-size: 1.8rem;
+    margin: 0;
+}
+
+.usuario span {
+    font-size: 1.8rem;
+    font-weight: 400;
+    margin: 0;
+}
+
+.usuario a{
+    text-decoration: none;
+}
+
+.trofeu {
+    font-size: 2rem; 
+    margin-right: 10px;
 }
 
 .mascote_big{
     width: 450px;
     height: auto;
-    margin-left: 20px;
 }
 
 .minhas_listas {
     display: flex;
 }
 
-.avaliaçoes,
+.avaliacoes,
 .desejos {
     flex: 1;
     padding: 20px;
 }
 
-.poster{
-    width: 150px;
-    height: auto;
-}
-
-.card {
-    background-color: black;
-    width: calc(100%); /* Divide em duas colunas com um espaço de 10px entre elas */
-    border: 1px solid #d83333;
-    box-shadow: 0 2px 4px rgb(24, 24, 24);
-    padding: 10px;
-    border-radius: 10px;
+.card-avaliacao{
     display: flex;
-    align-items: left;
-    justify-content: flex-start;
-    margin-bottom: 5px;
-    margin-top: 5px;
-    max-width: 100%;
+    align-items:  center;
+    margin: 20px;
+    background-color: #000;
+    border-radius: 10px;
+    border: 2px solid var(--vermelho-principal);
+    padding: 10px;
+    max-width: 1100px;
+
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
 }
 
-.comentario {
-    flex-grow: 1; /* Faz com que o texto ocupe todo o espaço restante à direita da imagem */
-    padding: 10px; /* Adicione um pouco de preenchimento para espaçamento interno */
-    max-width: 100%;
-    max-height: 100%;
-    word-wrap: break-word; /* Permite a quebra de linha */
-    overflow: hidden;
+.left-column {
+    padding: 10px; 
 }
+  
+.right-column {
+    flex: 1; 
+    padding: 10px;
+}
+
+.card-avaliacao p{
+    text-align: justify;
+    color: #fff;
+    padding: 10px;
+    font-size: 1rem;
+}
+
+.card-avaliacao img {
+    width: 186px;
+    height: 278px;
+    border-radius: 10px;
+}
+
 
 .rating {
-    width: 100%;
+    width: fit-content;
     font-size: 2rem;
     text-align: left;
     flex-direction: column;
-    margin-left: 5px;
+    margin: 5px;
 }
   
 .rating__star {
@@ -101,14 +119,124 @@
 }
 
 .ver_comentario{
-    margin-left: 275px;
-    margin-top: -41px;
+    margin: 10px;
 }
 
-button {
+.button-comentario {
     background-color: #e71111; 
+    font-size: 1rem;
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 5px;
     cursor: pointer;
+    text-decoration: none;
+}
+
+
+.titulo-filme {
+    font-size: 1.5rem; 
+    font-weight: 600;
+    color: #fff;
+    margin: 0;
+}
+
+.sinopse {
+    font-size: 1rem; 
+    color: #fff;
+    text-align: justify;
+    padding-top: 10px;
+}
+
+.card-avaliacao img {
+    width: 186px;
+    height: 278px;
+    border-radius: 10px;
+}
+
+@media screen and (max-width: 768px) {
+    html{
+        font-size: 50%;
+    }
+    
+    .avaliações, .desejos {
+        flex: 1; 
+    }
+
+    .imagem_e_texto, .card-avaliacao, .minhas_listas{
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .titulo{
+        margin: 20px;
+    }
+
+    .titulo h1{
+        text-align: center;
+        margin: 10px;
+    }
+
+    .foto_perfil_usuario{
+        width: 150px;
+        height: auto;
+    }
+
+    .usuario{
+        align-items: center;
+        margin-left: 0;
+        margin-top: 10px;
+    }
+
+    .mascote_big{
+        width: 150px;
+        height: auto;
+        margin-right: auto;
+        margin-left: auto;
+        margin-top: 10px;
+    }
+
+    .card-avaliacao {
+        flex-direction: column;
+        align-items: flex-start;
+        margin: 10px;
+        max-width: 100%;
+    }
+
+    .left-column, .right-column {
+        padding: 10px;
+        max-width: 100%;
+    }
+
+    .card-avaliacao img {
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+        margin-bottom: 10px;
+    }
+
+    .ver_comentario {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+}
+
+    /* Laptops */
+@media screen and (max-width: 1024px) {
+        html{
+            font-size: 75%;
+        }
+
+        .imagem_e_texto, .card-avaliacao{
+            flex-direction: column;
+            justify-content: center;
+        }
+}
+
+  /* Laptops */
+@media screen and (max-width: 1440px) {
+    html{
+        font-size: 80%;
+    }
+
+    
 }

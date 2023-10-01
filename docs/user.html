@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <link rel="stylesheet" href=".\estilos\comum.css">
-    <link rel="stylesheet" href=".\estilos\user.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Popcorn Prose</title>
+    <link rel="stylesheet" href="./estilos/comum.css">
+    <link rel="stylesheet" href="./estilos/user.css">
+    <link rel="icon" href="./assets/popcorn_mascote.png" type="image/x-icon">
     <script src="https://kit.fontawesome.com/23fd127124.js" crossorigin="anonymous"></script>
+    <title>Meus Filmes - Popcorn Prose</title>
 </head>
 
 <body>
@@ -15,13 +16,15 @@
             <h1>Popcorn Prose</h1>
         </a>
 
-        <!--a href="login.html">
-            <button class="login-btn">Login</button>
-        </a-->
-        <a href="">
-            <img src="https://avatars.githubusercontent.com/u/80594518?v=4" class="foto-perfil">
+        <a href="login.html" class="login-btn">
+            Login
         </a>
-    </header>
+        <!--
+        <a href="user.html">
+            <img src="https://avatars.githubusercontent.com/u/80594518?v=4" class="foto-perfil" alt="Foto do usuário">
+        </a>
+      -->
+    </header>  
 
     <div class="titulo">
         <h1>Meu perfil</h1>
@@ -30,68 +33,105 @@
         <img src="https://avatars.githubusercontent.com/u/80594518?v=4" class="foto_perfil_usuario">
         <div class="usuario">
             <h1>Nome do usuário</h1>
-            <h3>
-                <i class="fa-solid fa-trophy trofeu"></i>
-                <a href="points.html">Pontuação</a> 
-            </h3>
+            <a href="points.html">
+            <i class="fa-solid fa-trophy trofeu"></i>
+                <span class="pontuacao">Pontuação</span>
+            </a> 
         </div>
         <img class="mascote_big" src="./assets/popcorn_mascote_big.png" alt="">
     </div>
 
     <div class="minhas_listas">
 
-        <div class="avaliaçoes">
+        <div class="avaliacoes">
             <h1>Minhas avaliações</h1>
 
-                <div class="card">
-                    <img src="https://image.tmdb.org/t/p/original//y5sdkgO4IJMTnkjh9PG7kREPWrP.jpg" alt="" class="poster">
-                    <div class="comentario">
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+            <div class="card-avaliacao">
+                <div class="left-column">
+                    <img src="https://image.tmdb.org/t/p/w500//y5sdkgO4IJMTnkjh9PG7kREPWrP.jpg" alt="Poster">
+                </div>
+                <div class="right-column">
+                    <p class="comentario">Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
                         Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
                         It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
                         It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software 
-                        like Aldus PageMaker including versions of Lorem Ipsum.
-                    </div>
+                        like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                        <div class="rating">
+                            <div class="rating">
+                                <i class="rating__star far fa-star"></i>
+                                <i class="rating__star far fa-star"></i>
+                                <i class="rating__star far fa-star"></i>
+                                <i class="rating__star far fa-star"></i>
+                                <i class="rating__star far fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="ver_comentario">
+                            <a href="" class="button-comentario">
+                                Ver Comentário
+                            </a>
+                        </div>
                 </div>
+            </div>
 
-                <div class="card">
-                    <img src="https://image.tmdb.org/t/p/original//laCJxobHoPVaLQTKxc14Y2zV64J.jpg" alt="" class="poster">
-                    <div class="comentario">
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+            <div class="card-avaliacao">
+                <div class="left-column">
+                    <img src="https://image.tmdb.org/t/p/original//laCJxobHoPVaLQTKxc14Y2zV64J.jpg" alt="Poster">
+                </div>
+                <div class="right-column">
+                    <p class="comentario">Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
                         Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
                         It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
                         It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software 
-                        like Aldus PageMaker including versions of Lorem Ipsum.
-                    </div>
+                        like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                        <div class="rating">
+                            <div class="rating">
+                                <i class="rating__star far fa-star"></i>
+                                <i class="rating__star far fa-star"></i>
+                                <i class="rating__star far fa-star"></i>
+                                <i class="rating__star far fa-star"></i>
+                                <i class="rating__star far fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="ver_comentario">
+                            <a href="" class="button-comentario">
+                                Ver Comentário
+                            </a>
+                        </div>
                 </div>
-                <div class="rating">
-                    <div class="rating">
-                        <i class="rating__star far fa-star"></i>
-                        <i class="rating__star far fa-star"></i>
-                        <i class="rating__star far fa-star"></i>
-                        <i class="rating__star far fa-star"></i>
-                        <i class="rating__star far fa-star"></i>
-                    </div>
-                </div>
-                <div class="ver_comentario">
-                    <button>
-                        Ver Comentário
-                    </button>
-                </div>
+            </div>
+            
         </div>
 
         <div class="desejos">
             <h1>Lista de desejos</h1>
-            <div class="card">
-                <img src="https://image.tmdb.org/t/p/original//qU60nhBRbKU23gIGrZi2CvUj6MQ.jpg" alt="" class="poster">
+            <div class="card-avaliacao">
+                <div class="left-column">
+                    <img src="https://image.tmdb.org/t/p/original//qU60nhBRbKU23gIGrZi2CvUj6MQ.jpg" alt="Poster" class="poster">
+                </div>
+                <div class="right-column">
+                    <p class="titulo-filme">Gran Turismo</p>
+                    <p class="sinopse">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam finibus justo vel eros
+                        consectetur euismod. Suspendisse potenti. Donec efficitur nisi ac ligula cursus, a vestibulum
+                        tellus lobortis. Sed et facilisis augue.
+                    </p>
+                </div>
             </div>
-            <div class="card">
-                <img src="https://image.tmdb.org/t/p/original//4CwKj1fw33BXYzxvrpM3GlAhK4L.jpg" alt="" class="poster">
+
+            <div class="card-avaliacao">
+                <div class="left-column">
+                    <img src="https://image.tmdb.org/t/p/original//4CwKj1fw33BXYzxvrpM3GlAhK4L.jpg" alt="Poster" class="poster">
+                </div>
+                <div class="right-column">
+                    <p class="titulo-filme">Homem Aranha: Atráves do Aranhaverso</p>
+                    <p class="sinopse">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam finibus justo vel eros
+                        consectetur euismod. Suspendisse potenti. Donec efficitur nisi ac ligula cursus, a vestibulum
+                        tellus lobortis. Sed et facilisis augue.
+                    </p>
+                </div>
             </div>
         </div>
-            
-        
-        
     </div>
 
 </body>

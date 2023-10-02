@@ -46,13 +46,13 @@
 }
 
 .poster-container i{
-    font-size: 2em;
+    font-size: 2rem;
     margin-bottom: 12px;
 }
 
 .poster-container p{
     color: #ffffff;
-    font-size: 1em;
+    font-size: 1rem;
 }
 
 .icon-lista{
@@ -75,7 +75,7 @@
     width: 100%;
     font-size: 2rem;
     text-align: center;
-    margin-top: 1.25rem;
+    margin-top: 20px;
 }
   
 .rating__star {
@@ -103,7 +103,7 @@
     height: 176px;
     width: 100%;
     max-width: 100%;
-    font-size: 1em;
+    font-size: 1rem;
     border-width: 1px;
     border-color: #d83333;
     color: #ffffff;
@@ -186,17 +186,21 @@
 
 .info-container i{
     color: var(--vermelho-principal);
-    font-size: 2em;
+    font-size: 2rem;
     margin-bottom: 12px;
 }
 
 
 .info-container p{
-    font-size: 1em;
+    font-size: 1rem;
 }
 
 
-@media screen and (max-width: 870px) {
+@media screen and (max-width: 769px) {
+    html{
+        font-size: 75%;
+    }
+
     .container-movie {
         flex-direction: column;
     }
@@ -211,30 +215,11 @@
         height: auto;
     }
     
-    .poster-container li{
-        font-size: 1em;
-    }
-
+    
     .logo-container img{
-        width: 20em;
+        width: 300px;
         max-width: 100%;
         height: auto;
-    }
-
-    .rating__star {
-        font-size: 1em;
-    }
-
-    .box-review h3{
-        font-size: 1em;
-    }
-
-    .box-review button{
-        font-size: 0.8em;
-    }
-    
-    .info-container h3{
-        font-size: 1.5em;
     }
     
 }

@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="estilos/comum.css">
     <link rel="stylesheet" href="estilos/style_search.css">
     <link rel="icon" href="./assets/popcorn_mascote.png" type="image/x-icon">
@@ -10,20 +11,33 @@
     <title>Busca - Popcorn Prose</title>
 </head>
 <body>
-    <header class="popcorn-nav">
-        <a href="index.html">
+    
+    <header class="popcorn-nav navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="index.html">
             <h1>Popcorn Prose</h1>
         </a>
-
-        <a href="login.html" class="login-btn">
-            Login
-        </a>
-        <!--
-        <a href="user.html">
-            <img src="https://avatars.githubusercontent.com/u/80594518?v=4" class="foto-perfil" alt="Foto do usuário">
-        </a>
-      -->
-    </header>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+  
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="sobre.html">Sobre</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="search.html">Busca</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="user.html">Meus Filmes</a>
+              </li> <!--Na versão final login e meus filmes nao estarao juntos, pois meus filmes seria a página do usuario logado-->
+                <li class="nav-item">
+                    <a class="nav-link" href="login.html">Login</a>
+                </li>
+            </ul>
+        </div>
+      </header> 
 
     <section class="search-bar">
         <input type="text" placeholder="Buscar filme ou série">
@@ -37,6 +51,9 @@
         <div id="search-results"></div>
     </section>
 
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="scripts/search_script.js"></script>
 </body>
 </html>

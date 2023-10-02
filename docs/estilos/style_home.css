@@ -18,13 +18,13 @@
 }
 
 .welcome-message h1{
-    font-size: 55px;
+    font-size: 4rem;
     color: #D83333;
     font-weight: 700;
 }
 
 .welcome-message h4{
-    font-size: 19px;
+    font-size: 1.5rem;
     font-weight: 500;
 }
 
@@ -37,11 +37,11 @@
 
 .info-user h4{
     font-weight: 300;
-    font-size: 24px;
+    font-size: 1.5rem;
 }
 
 .info-user i{
-    font-size: 30px;
+    font-size: 1.8rem;
     padding: 5px;
 }
 
@@ -58,9 +58,12 @@
 }
 
 .btn-newreview i{
-    font-size: 14px;
+    font-size: 1rem;
 }
 
+.btn-newreview{
+    font-size: 1rem;
+}
 .carousel-inner .carousel-item img {
     max-width: 100%;
     max-height: auto;
@@ -96,7 +99,7 @@
 .popular-movies h2, .popular-series h2{
     font-weight: 300;
     color: #D83333;
-    font-size: 28px;
+    font-size: 1.7rem;
     margin-bottom: 10px;
 }
 /* Estilos para o contêiner de cards de filme */
@@ -126,7 +129,7 @@
 
 /* Estilos para o título do filme dentro do card */
 .movie-title {
-    font-size: 14px;
+    font-size: 1rem;
     color: #FFF;
     width: 100%;
     left: 0;
@@ -135,7 +138,11 @@
 }
 
   /*Celulares e tablets*/
-@media screen and (max-width: 820px){
+@media screen and (max-width: 768px){
+    html{
+        font-size: 50%;
+    }
+
     .top-banner{
         flex-direction: column-reverse;
     }
@@ -143,30 +150,16 @@
     .welcome-message, .info-user{
        margin: 15px;
     }
+
     .coluna-esquerda{
         width: 100%;
         margin-left: auto;
     }
-    .welcome-message h1{
-        font-size: 40px;
-    }
-
-    .welcome-message h4{
-        font-size: 15px;
-    }
-
+   
     .info-user{
         margin: auto;
     }
-    .info-user h4{
-        font-size: 20px;
-    }
-
-    .info-user button{
-        width: fit-content;
-        font-size: 14px;
-    }
-
+   
     .info-user a{
         padding: 5px;
     }
@@ -181,9 +174,20 @@
         height: auto;
     }
 
-    .popular-movies h2, .popular-series h2{
-        font-size: 24px;
+}
+
+@media screen and (max-width: 1024px){
+    html{
+        font-size: 75%;
     }
 
-    
+    .top-banner{
+        flex-direction: column-reverse;
+    }
+
+    .coluna-esquerda{
+        width: 100%;
+        margin-left: auto;
+    }
+
 }

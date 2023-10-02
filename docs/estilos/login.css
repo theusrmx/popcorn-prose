@@ -146,6 +146,39 @@ form > a.botao:hover {
     text-decoration: underline;
 }
 
+div.campo #genero {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid var(--vermelho-principal);
+    border-radius: 8px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #1e1e1e;
+    outline: none;
+}
+
+div.campo #genero::after {
+    content: '\f0de'; 
+    font-family: 'FontAwesomeSolid';
+    font-size: 14px;
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    color: var(--vermelho-principal);
+}
+
+
+div.campo #genero option {
+    font-size: 16px;
+    background-color: #1e1e1e;
+    color: #fff;
+}
+
+div.campo #genero option:checked {
+    background-color: var(--vermelho-principal);
+}
+
 @media (max-width: 768px) {
     #login {
         flex-direction: column;

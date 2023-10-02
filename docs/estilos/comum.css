@@ -17,6 +17,11 @@ body{
     background-color: #1e1e1e;
 }
 
+.texto-logo{
+    color: #d83333;
+    font-family: 'MADNESS_HYPERACTIVE';
+}
+
 .popcorn-nav {
     display: flex;
     justify-content: space-between;

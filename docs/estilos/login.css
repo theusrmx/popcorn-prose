@@ -82,9 +82,8 @@ div.campo > label {
 
 div.campo > i {
     color: #fff;
-    font-size: 2em;
-    width: 40px;
-    padding: 5px;
+    font-size: 1.5rem;
+    padding: 10px;
 }
 
 div.campo > input {

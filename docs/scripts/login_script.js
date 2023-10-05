@@ -6,7 +6,5 @@ const BASE_URL_LOGO = 'https://image.tmdb.org/t/p/original/';
 let interval = 5000;
 
 
-const slideShowLogin = iniciarSlides(API_KEY, BASE_URL, BASE_URL_LOGO, interval, 'backgroundSlide', 'fade');
-const slideShowLoginMin = iniciarSlides(API_KEY, BASE_URL, BASE_URL_LOGO, interval, 'imagem', 'fade');
+const slideShowLogin = iniciarSlides(API_KEY, BASE_URL, BASE_URL_LOGO, interval, 'wallpaper', 'fade');
 slideShowLogin();
-slideShowLoginMin();

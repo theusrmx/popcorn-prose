@@ -16,70 +16,67 @@
 
     <main>
         <section id="login">
+            <form action="" method="post" autocomplete="on">
+                <div class="wrapper">
+                    <a class="go-home" href="index.html">
+                        <h1 class="nome-site">Popcorn Prose</h1>
+                    </a>
+                    <h1>Cadastro</h1>
+                    <p></p>
+                        <div class="campo">
+                            <i class="fa-solid fa-user"></i>
+                            <input type="text" name="nome" id="inome" placeholder="Nome" required maxlength="15">
+                        </div>
+                        
+                        <div class="campo">
+                            <i class="fa-solid fa-user"></i>
+                            <input type="text" name="sobrenome" id="iSnome" placeholder="Sobrenome" required maxlength="15">
+                        </div>
+                        
+                        <div class="campo">
+                            <i class="fa-solid fa-calendar"></i>
+                            <input type="date" name="data_nascimento" id="idata_nascimento" required>
+                        </div>
+                        
+                        <div class="campo">
+                            <i class="fa-solid fa-envelope"></i>
+                            <input type="email" name="email" id="iemail" placeholder="Email" required>
+                        </div>
+                        
+                        <div class="campo">
+                            <i class="fa-solid fa-lock"></i>
+                            <input type="password" name="senha" id="isenha" placeholder="Sua senha" autocomplete="current-password" required minlength="8" maxlength="20">
+                            <label for="isenha"></label>
+                        </div>
+                        
+                        <div class="campo">
+                            <i class="fa-solid fa-lock"></i>
+                            <input type="password" name="repetir_senha" id="irepetir_senha" placeholder="Repita sua senha" autocomplete="current-password" required minlength="8" maxlength="20">
+                            <label for="irepetir_senha"></label>
+                        </div>
 
-            <div id="formulario">
-                <a class="go-home" href="index.html">
-                    <h1 class="nome-site">Popcorn Prose</h1>
-                </a>
-                <h1>Cadastro</h1>
-                <p></p>
-                <form action="" method="post" autocomplete="on">
+                        <div class="campo">
+                            <i class="fa-solid fa-venus-mars"></i>
+                            <label for="genero">Gênero:</label>
+                            <select name="genero" id="genero" required>
+                                <option value="masculino">Masculino</option>
+                                <option value="feminino">Feminino</option>
+                                <option value="outro">Outro</option>
+                            </select>
+                        </div>
 
-                    <div class="campo">
-                        <i class="fa-solid fa-user"></i>
-                        <input type="text" name="nome" id="inome" placeholder="Nome" required maxlength="15">
-                    </div>
-                    
-                    <div class="campo">
-                        <i class="fa-solid fa-user"></i>
-                        <input type="text" name="sobrenome" id="iSnome" placeholder="Sobrenome" required maxlength="15">
-                    </div>
-                    
-                    <div class="campo">
-                        <i class="fa-solid fa-calendar"></i>
-                        <input type="date" name="data_nascimento" id="idata_nascimento" required>
-                    </div>
-                    
-                    <div class="campo">
-                        <i class="fa-solid fa-envelope"></i>
-                        <input type="email" name="email" id="iemail" placeholder="Email" required>
-                    </div>
-                    
-                    <div class="campo">
-                        <i class="fa-solid fa-lock"></i>
-                        <input type="password" name="senha" id="isenha" placeholder="Sua senha" autocomplete="current-password" required minlength="8" maxlength="20">
-                        <label for="isenha"></label>
-                    </div>
-                    
-                    <div class="campo">
-                        <i class="fa-solid fa-lock"></i>
-                        <input type="password" name="repetir_senha" id="irepetir_senha" placeholder="Repita sua senha" autocomplete="current-password" required minlength="8" maxlength="20">
-                        <label for="irepetir_senha"></label>
-                    </div>
+                        <div class="campo">
+                            <i class="fa-solid fa-globe"></i>
+                            <input type="text" name="nacionalidade" id="inacionalidade" placeholder="Nacionalidade" required>
+                        </div>
 
-                    <div class="campo">
-                        <i class="fa-solid fa-venus-mars"></i>
-                        <label for="genero">Gênero:</label>
-                        <select name="genero" id="genero" required>
-                            <option value="masculino">Masculino</option>
-                            <option value="feminino">Feminino</option>
-                            <option value="outro">Outro</option>
-                        </select>
-                    </div>
-
-                    <div class="campo">
-                        <i class="fa-solid fa-globe"></i>
-                        <input type="text" name="nacionalidade" id="inacionalidade" placeholder="Nacionalidade" required>
-                    </div>
-
-                    <input type="submit" value="Cadastrar">
-                    <p class="cadastro-a">Já tem uma conta? <a href="login.html">Entre aqui</a>
-                </form>
-            </div>        
-                <div id="imagem">
-                    <!--aqui vai a imagem CSS-->
-                </div>
+                        <input type="submit" value="Cadastrar" class="botao-login">
+                        <p class="cadastro-a">Já tem uma conta? <a href="login.html">Entre aqui</a>
+                </div>        
+            </form>       
         </section>
+
+        <section id="wallpaper"></section>
 
     </main>
 

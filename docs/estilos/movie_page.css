@@ -223,3 +223,14 @@
     }
     
 }
+
+@media screen and (max-width: 1024px) {
+    html{
+        font-size: 75%;
+    }
+}
+@media screen and (max-width: 1440px) {
+    html{
+        font-size: 80%;
+    }   
+}

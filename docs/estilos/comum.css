@@ -88,16 +88,3 @@ body{
 ::-webkit-scrollbar-thumb:hover {
     background-color: #555; /* Cor quando o mouse está sobre ele */
 }
-
-
-@media screen and (max-width: 768px) { 
-    .popcorn-nav h1{
-        font-size: 2rem;
-    }
-
-    .popcorn-nav img{
-        width: 2rem;
-        height: 2rem;
-    }
-
-}

@@ -61,7 +61,7 @@ const mensagensAvaliacaoFilmes = [
 }
 
 
-const slideShowHome = iniciarSlides(apiKey, BASE_URL, BASE_URL_LOGO, interval, 'carouselExampleSlidesOnly', 'slide');
+const slideShowHome = iniciarSlides(apiKey, BASE_URL, BASE_URL_LOGO, interval, 'slideHome', 'slide');
 
 // Carregue os filmes populares ao carregar a página
 window.addEventListener('load', () => {

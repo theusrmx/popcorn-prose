@@ -6,45 +6,43 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="estilos/comum.css">
     <link rel="stylesheet" href="estilos/style_home.css">
-    <link rel="icon" href="./assets/popcorn_mascote.png" type="image/x-icon">
     <script src="https://kit.fontawesome.com/23fd127124.js" crossorigin="anonymous"></script>
     <title>Popcorn Prose - Home</title>
 </head>
 <body>
-    
-    <header class="popcorn-nav navbar navbar-expand-lg navbar-dark">
-      <a class="navbar-brand" href="index.html">
-          <h1>Popcorn Prose</h1>
-      </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-      </button>
 
-      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-          <ul class="navbar-nav">
+  <header class="popcorn-nav navbar navbar-expand-lg navbar-dark">
+    <a class="navbar-brand" href="index.html">
+        <h1>Popcorn Prose</h1>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="sobre.html">Sobre</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="search.html">Busca</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="user.html">Meus Filmes</a>
+          </li> <!--Na versão final login e meus filmes nao estarao juntos, pois meus filmes seria a página do usuario logado-->
             <li class="nav-item">
-              <a class="nav-link" href="sobre.html">Sobre</a>
+                <a class="nav-link" href="login.html">Login</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="search.html">Busca</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="user.html">Meus Filmes</a>
-            </li> <!--Na versão final login e meus filmes nao estarao juntos, pois meus filmes seria a página do usuario logado-->
-              <li class="nav-item">
-                  <a class="nav-link" href="login.html">Login</a>
-              </li>
-          </ul>
-      </div>
-    </header> 
-    
-    
+        </ul>
+    </div>
+  </header>
+
     <section class="top-banner">
         <div class="coluna-esquerda">
           <div class="welcome-message">
-            <h1>Bem vindo, Carl!</h1>
-            <h4 id="mensagemUser"><!--Mensagem dinamica via JS-->A magia do cinema está em sua opinião.</h4>
+            <h1>Bem vindo, John!</h1>
+            <h4 id="mensagemUser"></h4>
           </div>
       
           <div class="info-user">
@@ -56,7 +54,7 @@
           </div>
         </div>
       
-        <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+        <div id="slideHome" class="carousel slide" data-bs-ride="carousel">
           <div class="carousel-inner">
             <!-- Conteúdo do carrossel aqui -->
           </div>
@@ -66,7 +64,6 @@
         <section class="popular-movies">
             <div>
                 <h2>Filmes populares</h2>
-                <!--Conteudo exibido a partir de pesquisa da api JS-->
                 <div class="movie-cards"></div>
             </div>
         </section>
@@ -76,7 +73,6 @@
         <section class="popular-series">
             <div>
                 <h2>Séries populares</h2>
-                <!--Conteudo exibido a partir de pesquisa da api JS-->
                 <div class="series-cards"></div>
             </div>
        
@@ -84,9 +80,7 @@
 
         
 
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-        <script type="module" src="scripts/home_script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script type="module" src="scripts/home_script.js"></script>
 </body>
 </html>

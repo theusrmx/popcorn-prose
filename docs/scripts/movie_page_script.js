@@ -52,7 +52,11 @@ function montarPagina(){
           } else {
             document.getElementById('movie-title').textContent = tituloFilme;
             logoImg.style.display = 'none';
-          } 
+            checkIfAllImagesLoaded(); //em uma situação que nao houver logo, carregar a página
+          }
+          logoImg.onload = function() {
+            checkIfAllImagesLoaded();
+          }
         })
         .catch(err => console.error(err));
 
@@ -92,10 +96,6 @@ function montarPagina(){
         document.getElementById('genre').textContent = generoFilme;
         document.getElementById('release-year').textContent = dataLancamento;
         document.getElementById('rating').textContent = notaFilme.toFixed(1);
-
-        //Retirar loader ao carregar a página
-        loadingBackground.style.display = 'none';
-        loadingIndicator.style.display = 'none';
     })
     .catch(error => {
         console.error('Erro ao carregar os detalhes do filme ou série:', error);
@@ -103,6 +103,8 @@ function montarPagina(){
 
 }
 
+const imagesToLoad = 2; // Defina o número total de imagens a serem carregadas
+let loadedImages = 0;
 
 //formatar numeros grandes
 function formatNumber(number) {
@@ -157,8 +159,19 @@ const colorThief = new ColorThief();
           // Aplicar gradiente normalmente para telas maiores
           gradient.style.background = `radial-gradient(at top left, rgb(${R2}, ${G2}, ${B2}), rgb(${R1}, ${G1}, ${B1}), #1e1e1e 60%)`;
         }
+
+        checkIfAllImagesLoaded();
     }
       
+function checkIfAllImagesLoaded() { //function para administrar o loading das imagens para retirar o loading
+    loadedImages++;
+    if (loadedImages === imagesToLoad) {
+      // Todas as imagens foram carregadas, agora podemos esconder o loader
+        loadingBackground.style.display = 'none';
+        loadingIndicator.style.display = 'none';
+    }
+  }
+
 
 const ratingStars = [...document.getElementsByClassName("rating__star")];
 

@@ -5,6 +5,10 @@ const BASE_URL = 'https://image.tmdb.org/t/p/original/';
 const BASE_URL_LOGO = 'https://image.tmdb.org/t/p/original/';
 let interval = 5000;
 
+
+
+
+
 //Função para carrregar conteudo popular de acordo com o paramento TIPO MIDIA - TV OU MOVIE
 function carregarConteudoPopular(tipoMidia, elementoHTML) {
     const midiaRequisitada = tipoMidia;
@@ -34,6 +38,10 @@ function carregarConteudoPopular(tipoMidia, elementoHTML) {
                 });
 
                 elemento.appendChild(midiaCard);
+                
+                //Retirar loader ao carregar a página
+                //loadingBackground.style.display = 'none';
+                //loadingIndicator.style.display = 'none';
             });
         })
         .catch(error => {
@@ -63,10 +71,33 @@ const mensagensAvaliacaoFilmes = [
 
 const slideShowHome = iniciarSlides(apiKey, BASE_URL, BASE_URL_LOGO, interval, 'slideHome', 'slide');
 
-// Carregue os filmes populares ao carregar a página
-window.addEventListener('load', () => {
-    carregarConteudoPopular('movie', '.movie-cards');
-    carregarConteudoPopular('tv', '.series-cards')
-    slideShowHome();
-    exibirMensagemAleatoria(mensagensAvaliacaoFilmes);
-});
+window.addEventListener('load', async () => {
+    try {
+      // Mostra o indicador de carregamento
+      const loadingBackground = document.getElementById('background-loader');
+      const loadingIndicator = document.getElementById('loader');
+      loadingBackground.style.display = 'flex';
+      loadingIndicator.style.display = 'flex';
+  
+      // Aguarde o carregamento do conteúdo popular para filmes
+      await carregarConteudoPopular('movie', '.movie-cards');
+  
+      // Aguarde o carregamento do conteúdo popular para séries
+      await carregarConteudoPopular('tv', '.series-cards');
+  
+      // Execute a função para configurar o slideshow na home
+      slideShowHome();
+  
+      // Execute a função para exibir uma mensagem aleatória
+      exibirMensagemAleatoria(mensagensAvaliacaoFilmes);
+    } catch (error) {
+      console.error('Erro durante o carregamento da página:', error);
+    } finally {
+      // Oculta o indicador de carregamento
+      const loadingBackground = document.getElementById('background-loader');
+      const loadingIndicator = document.getElementById('loader');
+      loadingBackground.style.display = 'none';
+      loadingIndicator.style.display = 'none';
+    }
+  });
+  

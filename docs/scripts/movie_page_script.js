@@ -14,6 +14,11 @@ const options = {
   }
 };
 
+const loadingBackground = document.getElementById('background-loader');
+loadingBackground.style.display = 'flex';
+
+const loadingIndicator = document.getElementById('loader');
+loadingIndicator.style.display = 'flex';
 
 // Verifique se o ID do filme ou série é válido (não vazio)
 if (!filmeId) {
@@ -38,13 +43,15 @@ function montarPagina(){
           if (logoPt) {
             document.getElementById('movie-title').textContent = '';
             logoImg.src = `https://image.tmdb.org/t/p/w500/${logoPt.file_path}`;
+            logoImg.alt = `Logo: ${tituloFilme}`
           } else if(logoEn) {
             // Se não encontrar uma logo em pt, exibir logo padrão (english)
             document.getElementById('movie-title').textContent = '';
             logoImg.src = `https://image.tmdb.org/t/p/w500/${logoEn.file_path}`
+            logoImg.alt = `Logo: ${tituloFilme}`
           } else {
             document.getElementById('movie-title').textContent = tituloFilme;
-            logoImg.alt = '';
+            logoImg.style.display = 'none';
           } 
         })
         .catch(err => console.error(err));
@@ -62,9 +69,10 @@ function montarPagina(){
         //let googleProxyURL = 'https://images1-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&refresh=2592000&url='; //utliziando um server proxy para evitar problemas com crossorigin
 
         //Manipulação DOM para inserir elementos da API na tela
-        const minhaImagem = document.getElementById('movie-poster');
+        const posterFilme = document.getElementById('movie-poster');
         image.setAttribute('crossOrigin','anonymous');
-        minhaImagem.src = posterPath;
+        posterFilme.src = posterPath;
+        posterFilme.alt = `Poster: ${tituloFilme}`
         
         document.getElementById('movie-details-title').textContent = `${tituloFilme} - Popcorn Prose`; //Definiç~~ao title page de aordo com o nome do filme
         document.getElementById('views').textContent = formatNumber(viewsFilme);
@@ -84,7 +92,10 @@ function montarPagina(){
         document.getElementById('genre').textContent = generoFilme;
         document.getElementById('release-year').textContent = dataLancamento;
         document.getElementById('rating').textContent = notaFilme.toFixed(1);
-        
+
+        //Retirar loader ao carregar a página
+        loadingBackground.style.display = 'none';
+        loadingIndicator.style.display = 'none';
     })
     .catch(error => {
         console.error('Erro ao carregar os detalhes do filme ou série:', error);

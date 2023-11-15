@@ -90,35 +90,63 @@ export function iniciarSlides(apiKey, baseUrl, baseUrlLogo, tempoSlide, elemento
     let currentIndex = 0;
   
     function updateCarousel() {
-        elementoSlide.innerHTML = '';
-  
-        
-        backdrops.forEach((image, index) => {
-          const carouselItem = document.createElement('div');
-          carouselItem.classList.add('carousel-item');
-          if (index === 0) {
-            carouselItem.classList.add('active');
+      elementoSlide.innerHTML = '';
+      let imagesLoaded = 0;
+    
+      backdrops.forEach((image, index) => {
+        const carouselItem = document.createElement('div');
+        carouselItem.classList.add('carousel-item');
+        if (index === 0) {
+          carouselItem.classList.add('active');
+        }
+    
+        const img = document.createElement('img');
+        img.classList.add('d-block', 'img-fluid');
+        img.src = IMAGE_BASE_URL + image;
+        img.alt = 'Slide Image';
+    
+        // Adicionar evento de carregamento de imagem
+        img.addEventListener('load', () => {
+          imagesLoaded++;
+    
+          // Se todas as imagens foram carregadas, esconder o loader
+          if (imagesLoaded === backdrops.length) {
+            const loadingBackground = document.getElementById('background-loader');
+            const loadingIndicator = document.getElementById('loader');
+          
+            loadingBackground.style.display = 'none';
+            loadingIndicator.style.display = 'none'; 
           }
-  
-          const img = document.createElement('img');
-          img.classList.add('d-block', 'img-fluid');
-          img.src = IMAGE_BASE_URL + image;
-          img.alt = 'Slide Image';
-  
-          carouselItem.appendChild(img);
-  
-          if (animacao === 'slide' && logos[index]) {
-            const logoImg = document.createElement('img');
-            logoImg.classList.add('logo-image');
-            logoImg.src = LOGO_BASE_URL + logos[index];
-            logoImg.alt = 'Logo do Filme';
-  
-            carouselItem.appendChild(logoImg);
-          }
-  
-          elementoSlide.appendChild(carouselItem);
-        }); 
-  }
+        });
+    
+        carouselItem.appendChild(img);
+    
+        if (animacao === 'slide' && logos[index]) {
+          const logoImg = document.createElement('img');
+          logoImg.classList.add('logo-image');
+          logoImg.src = LOGO_BASE_URL + logos[index];
+          logoImg.alt = 'Logo do Filme';
+    
+          // Adicionar evento de carregamento de imagem para o logo
+          logoImg.addEventListener('load', () => {
+          imagesLoaded++;
+    
+            // Se todas as imagens foram carregadas, esconder o loader
+            if (imagesLoaded === backdrops.length) {
+              const loadingBackground = document.getElementById('background-loader');
+              const loadingIndicator = document.getElementById('loader');
+          
+              loadingBackground.style.display = 'none';
+              loadingIndicator.style.display = 'none';
+            }
+          });
+    
+          carouselItem.appendChild(logoImg);
+        }
+    
+        elementoSlide.appendChild(carouselItem);
+      });
+    }
   
   function mudarSlide() {
     const proximoIndice = (currentIndex + 1) % backdrops.length;

@@ -71,33 +71,10 @@ const mensagensAvaliacaoFilmes = [
 
 const slideShowHome = iniciarSlides(apiKey, BASE_URL, BASE_URL_LOGO, interval, 'slideHome', 'slide');
 
-window.addEventListener('load', async () => {
-    try {
-      // Mostra o indicador de carregamento
-      const loadingBackground = document.getElementById('background-loader');
-      const loadingIndicator = document.getElementById('loader');
-      loadingBackground.style.display = 'flex';
-      loadingIndicator.style.display = 'flex';
-  
-      // Aguarde o carregamento do conteúdo popular para filmes
-      await carregarConteudoPopular('movie', '.movie-cards');
-  
-      // Aguarde o carregamento do conteúdo popular para séries
-      await carregarConteudoPopular('tv', '.series-cards');
-  
-      // Execute a função para configurar o slideshow na home
-      slideShowHome();
-  
-      // Execute a função para exibir uma mensagem aleatória
-      exibirMensagemAleatoria(mensagensAvaliacaoFilmes);
-    } catch (error) {
-      console.error('Erro durante o carregamento da página:', error);
-    } finally {
-      // Oculta o indicador de carregamento
-      const loadingBackground = document.getElementById('background-loader');
-      const loadingIndicator = document.getElementById('loader');
-      loadingBackground.style.display = 'none';
-      loadingIndicator.style.display = 'none';
-    }
-  });
+window.addEventListener('load', () => {
+    carregarConteudoPopular('movie', '.movie-cards');
+    carregarConteudoPopular('tv', '.series-cards');
+    slideShowHome();
+    exibirMensagemAleatoria(mensagensAvaliacaoFilmes);
+});
   

@@ -1,6 +1,12 @@
 const apiKey = '557439512040e55c35f758f339c8e1d1';
 const searchResultsDiv = document.getElementById('search-results');
 
+const loadingBackground = document.getElementById('background-loader');
+loadingBackground.setAttribute('aria-hidden', 'false');
+
+const loadingIndicator = document.getElementById('loader');
+loadingIndicator.style.display = 'flex';
+
 function criarCard(midia, titulo, ano, resumo, id) {
     const cartaoDiv = document.createElement('div');
     cartaoDiv.classList.add('card-result');
@@ -20,6 +26,7 @@ function criarCard(midia, titulo, ano, resumo, id) {
         window.location.href = `movie_page.html?id=${id}&mediaType=${tipoConteudo}`;
     });
 
+    
     return cartaoDiv;
 }
 
@@ -37,6 +44,9 @@ function carregarFilmesPopulares() {
                     //cria um card para cada filme
                     const cartaoFilme = criarCard(filme, filme.title, filme.release_date.slice(0, 4), filme.overview, filme.id);
                     searchResultsDiv.appendChild(cartaoFilme);
+
+                    loadingBackground.setAttribute('aria-hidden', 'true');
+                    loadingIndicator.style.display = 'none';
                 }
             });
         })
@@ -57,6 +67,9 @@ function carregarSeriesPopulares() {
                     //cria um card para cada filme
                     const cartaoSerie = criarCard(serie, serie.name, serie.first_air_date.slice(0, 4), serie.overview, serie.id);
                     searchResultsDiv.appendChild(cartaoSerie);
+
+                    loadingBackground.setAttribute('aria-hidden', 'true');
+                    loadingIndicator.style.display = 'none';
                 }
             });
         })
@@ -83,36 +96,33 @@ function pesquisarFilmes() {
         return;
     }
 
-    
-
-    
     // Fazer uma solicitação à API TMDB para pesquisa de filmes
     fetch(`https://api.themoviedb.org/3/search/multi?api_key=${apiKey}&query=${consultaPesquisa}&language=pt-BR`)
         .then(response => response.json())
         .then(data => {
-
-            
-
             const resultadosPesquisa = data.results;
             resultadosPesquisa.forEach(filme => {
-               let tipoConteudo = filme.media_type;
-               let tituloConteudo;
-               let dataLancamento;
-               
-               //verificação de tipo de midia para adequar a requisição a cada uma
-               if(tipoConteudo === 'movie'){
+                let tipoConteudo = filme.media_type;
+                let tituloConteudo;
+                let dataLancamento;
+            
+                //verificação de tipo de midia para adequar a requisição a cada uma
+                if(tipoConteudo === 'movie'){
                 tituloConteudo = filme.title;
                 dataLancamento = filme.release_date.slice(0,4);
-               } else {
-                tituloConteudo = filme.name;
-                dataLancamento = filme.first_air_date.slice(0, 4);
-               }
+                } else {
+                    tituloConteudo = filme.name;
+                    dataLancamento = filme.first_air_date.slice(0, 4);
+                }
 
-               const card = criarCard(filme, tituloConteudo, dataLancamento, filme.overview, filme.id);
+                const card = criarCard(filme, tituloConteudo, dataLancamento, filme.overview, filme.id);
+                // Adicione o card criado ao searchResultsDiv
+                searchResultsDiv.appendChild(card);
 
-               // Adicione o card criado ao searchResultsDiv
-               searchResultsDiv.appendChild(card);
+                
             });
+            loadingBackground.setAttribute('aria-hidden', 'true');
+            loadingIndicator.style.display = 'none'; 
         })
         .catch(error => {
             console.error('Erro ao executar a pesquisa:', error);

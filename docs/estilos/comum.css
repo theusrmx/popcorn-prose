@@ -96,7 +96,10 @@ body{
     width: 100vw;
     height: 100vh;
     background: #000;
-    z-index: 999; /* Certifique-se de que o background esteja atrás do loader (use um valor alto para z-index) */
+    z-index: 999;
+    opacity: 1;
+    visibility: visible; /* Inicialmente visível */
+    transition: opacity 0.5s ease, visibility 0.5s ease; /* Adiciona transição para opacity e visibility */
 }
 
 #loader {
@@ -117,6 +120,11 @@ body{
     align-items: center;
 }
 
+/* Quando o #background-loader estiver invisível, esconde o #loader também */
+#background-loader[aria-hidden="true"] {
+    opacity: 0;
+    visibility: hidden;
+}
 
 @keyframes spin {
     0% { transform: rotate(0deg); }

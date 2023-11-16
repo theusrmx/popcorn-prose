@@ -13,9 +13,8 @@ const options = {
     Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1NTc0Mzk1MTIwNDBlNTVjMzVmNzU4ZjMzOWM4ZTFkMSIsInN1YiI6IjY0ZTY5ZTUwN2Q1ZGI1MDEwMDk0YTk2ZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.rzZhbE5Ch2tJsyNtSEnx58QkQDTlVZlqAuhV2t7Sulg'
   }
 };
-
 const loadingBackground = document.getElementById('background-loader');
-loadingBackground.style.display = 'flex';
+loadingBackground.setAttribute('aria-hidden', 'false');
 
 const loadingIndicator = document.getElementById('loader');
 loadingIndicator.style.display = 'flex';
@@ -167,7 +166,7 @@ function checkIfAllImagesLoaded() { //function para administrar o loading das im
     loadedImages++;
     if (loadedImages === imagesToLoad) {
       // Todas as imagens foram carregadas, agora podemos esconder o loader
-        loadingBackground.style.display = 'none';
+        loadingBackground.setAttribute('aria-hidden', 'true');
         loadingIndicator.style.display = 'none';
     }
   }

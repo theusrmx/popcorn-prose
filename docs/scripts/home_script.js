@@ -6,9 +6,6 @@ const BASE_URL_LOGO = 'https://image.tmdb.org/t/p/original/';
 let interval = 5000;
 
 
-
-
-
 //Função para carrregar conteudo popular de acordo com o paramento TIPO MIDIA - TV OU MOVIE
 function carregarConteudoPopular(tipoMidia, elementoHTML) {
     const midiaRequisitada = tipoMidia;

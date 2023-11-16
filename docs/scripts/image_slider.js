@@ -1,3 +1,11 @@
+const loadingBackground = document.getElementById('background-loader');
+loadingBackground.setAttribute('aria-hidden', 'false');
+
+const loadingIndicator = document.getElementById('loader');
+loadingIndicator.style.display = 'flex';
+
+
+
 export function iniciarSlides(apiKey, baseUrl, baseUrlLogo, tempoSlide, elemento, animacao) {
   const IMAGE_BASE_URL = baseUrl;
   const INTERVALO_SLIDE = tempoSlide;
@@ -111,11 +119,8 @@ export function iniciarSlides(apiKey, baseUrl, baseUrlLogo, tempoSlide, elemento
     
           // Se todas as imagens foram carregadas, esconder o loader
           if (imagesLoaded === backdrops.length) {
-            const loadingBackground = document.getElementById('background-loader');
-            const loadingIndicator = document.getElementById('loader');
-          
-            loadingBackground.style.display = 'none';
-            loadingIndicator.style.display = 'none'; 
+            loadingBackground.setAttribute('aria-hidden', 'true');
+            loadingIndicator.style.display = 'none';
           }
         });
     
@@ -133,10 +138,7 @@ export function iniciarSlides(apiKey, baseUrl, baseUrlLogo, tempoSlide, elemento
     
             // Se todas as imagens foram carregadas, esconder o loader
             if (imagesLoaded === backdrops.length) {
-              const loadingBackground = document.getElementById('background-loader');
-              const loadingIndicator = document.getElementById('loader');
-          
-              loadingBackground.style.display = 'none';
+              loadingBackground.setAttribute('aria-hidden', 'true');
               loadingIndicator.style.display = 'none';
             }
           });

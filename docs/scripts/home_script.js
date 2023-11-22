@@ -35,10 +35,6 @@ function carregarConteudoPopular(tipoMidia, elementoHTML) {
                 });
 
                 elemento.appendChild(midiaCard);
-                
-                //Retirar loader ao carregar a página
-                //loadingBackground.style.display = 'none';
-                //loadingIndicator.style.display = 'none';
             });
         })
         .catch(error => {
@@ -58,11 +54,43 @@ const mensagensAvaliacaoFilmes = [
     "Luz, câmera, ação!"
 ];
   
-  function exibirMensagemAleatoria() {
+function exibirMensagemAleatoria() {
+    const token = localStorage.getItem('token');
     let mensagemElement = document.getElementById('mensagemUser');
-    const indiceAleatorio = Math.floor(Math.random() * mensagensAvaliacaoFilmes.length);
-    mensagemElement.innerHTML = `${mensagensAvaliacaoFilmes[indiceAleatorio]}`
-    //console.log(mensagensAvaliacaoFilmes[indiceAleatorio]);
+    if(token){//se estiver logado, exibir a mensagem aleatória
+        const indiceAleatorio = Math.floor(Math.random() * mensagensAvaliacaoFilmes.length);
+        mensagemElement.innerHTML = `${mensagensAvaliacaoFilmes[indiceAleatorio]}`;
+    }else{
+        mensagemElement.innerHTML = "Faça o login para começar (ou continuar) seu diário cinematográfico!";
+    }
+}
+
+function exibirInfoUsuario() {
+    const token = localStorage.getItem('token');
+    const infoFilmes = document.getElementById('infoFilmes');
+    const infoSeries = document.getElementById('infoSeries');
+    const btnLogin = document.getElementById('btnLogin');
+
+    if (!token) { // se não tiver token, não exibirá as informações
+        infoFilmes.style.display = 'none';
+        infoSeries.style.display = 'none';
+        btnLogin.style.display = 'block'; 
+    } else {
+        // Se tiver token, exibir as informações
+        infoFilmes.style.display = 'block'; 
+        infoSeries.style.display = 'block';
+        btnLogin.style.display = 'none';
+    }
+}
+
+
+function exibirNomeUsuario() {
+    const nomeUsuario = localStorage.getItem('name');
+    const welcomeMessage = document.querySelector('.welcome-message h1');
+
+    if (nomeUsuario && welcomeMessage) {
+        welcomeMessage.textContent = `Bem vindo, ${nomeUsuario}!`;
+    }
 }
 
 
@@ -73,80 +101,9 @@ window.addEventListener('load', () => {
     carregarConteudoPopular('tv', '.series-cards');
     slideShowHome();
     exibirMensagemAleatoria(mensagensAvaliacaoFilmes);
-});
-  
-
-console.log(localStorage.getItem('name'))
-
-document.addEventListener('DOMContentLoaded', function() {
-    // Recupere o nome do usuário do localStorage
-    const nomeUsuario = localStorage.getItem('name');
-
-    // Verifique se o nome do usuário existe e não é nulo
-    if (nomeUsuario) {
-        // Atualize o conteúdo do elemento "Bem vindo, John!"
-        document.querySelector('.welcome-message h1').textContent = `Bem vindo, ${nomeUsuario}!`;
-    }
-
+    exibirNomeUsuario();
+    exibirInfoUsuario();
 });
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Recupere o token do localStorage
-    const token = localStorage.getItem('token');
 
-    // Se houver um token, o usuário está logado
-    if (token) {
-        // Remova o link de login
-        const linkLogin = document.querySelector('.navbar-nav .nav-link[href="login.html"]');
-        if (linkLogin) {
-            linkLogin.parentElement.style.display = 'none';
-        }
 
-        // Adicione os links "Meus Filmes" e "Deslogar"
-        const navbarNav = document.querySelector('.navbar-nav');
-        if (navbarNav) {
-            const linkMeusFilmes = criarLink('user.html', 'Meus Filmes');
-            const linkDeslogar = criarLink('#', 'Deslogar', deslogar);
-
-            navbarNav.appendChild(linkMeusFilmes);
-            navbarNav.appendChild(linkDeslogar);
-        }
-    } else {
-        // Se não houver token, o usuário não está logado
-        // Remova os links "Meus Filmes" e "Deslogar"
-        const linkMeusFilmes = document.querySelector('.navbar-nav .nav-link[href="user.html"]');
-        const linkDeslogar = document.querySelector('.navbar-nav .nav-link[href="#"]');
-
-        if (linkMeusFilmes) {
-            linkMeusFilmes.parentElement.style.display = 'none';
-        }
-
-        if (linkDeslogar) {
-            linkDeslogar.parentElement.style.display = 'none';
-        }
-    }
-});
-
-// Função auxiliar para criar um elemento de link
-function criarLink(href, texto, onClick) {
-    const link = document.createElement('li');
-    link.classList.add('nav-item');
-    const a = document.createElement('a');
-    a.classList.add('nav-link');
-    a.href = href;
-    a.textContent = texto;
-    if (onClick) {
-        a.addEventListener('click', onClick);
-    }
-    link.appendChild(a);
-    return link;
-}
-
-// Função de logout
-function deslogar() {
-    // Remova o token do localStorage
-    localStorage.removeItem('token');
-    localStorage.removeItem('name');
-    // Redirecione para a página de login
-    window.location.href = 'login.html';
-}

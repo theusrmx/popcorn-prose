@@ -46,7 +46,10 @@ async function getName(token) {
         }
 
         const response = await fetch('http://localhost:8080/auth/get-name', {
-            method: 'GET'
+            method: 'GET',
+            headers: {
+                'Authorization': token,
+            }
         });
 
         if (!response.ok) {

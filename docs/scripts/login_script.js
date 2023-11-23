@@ -1,12 +1,13 @@
 document.getElementById('formLogin').addEventListener('submit', function(event) {
     event.preventDefault();
 
-    var formData = new FormData(event.target);
+    const email = event.target.elements.login.value;
+    const senha = event.target.elements.senha.value;
 
     const loginData = {
-        email: formData.get('login'),
-        senha: formData.get('senha')
-    }
+        email: email,
+        senha: senha
+    };
 
     fetch('http://localhost:8080/auth/login', {
         method: 'POST',
@@ -25,9 +26,17 @@ document.getElementById('formLogin').addEventListener('submit', function(event) 
         console.log('Token recebido do servidor:', token);
         // Armazenar o token no localStorage
         localStorage.setItem('token', token);
-        getName(token);
-        getID(token);
-        getSurname(token);      
+        // Chamar as funções assíncronas após a obtenção do token
+        return Promise.all([getName(token), getID(token), getSurname(token)]);
+    })
+    .then(([name, id, surname]) => {
+        console.log('Nome do usuário:', name);
+        console.log('ID do usuário:', id);
+        console.log('Sobrenome do usuário:', surname);
+        // Armazenar informações adicionais no localStorage
+        localStorage.setItem('name', name);
+        localStorage.setItem('id', id);
+        localStorage.setItem('surname', surname);
         // Redirecionar para a página principal
         window.location.href = 'index.html';
     })

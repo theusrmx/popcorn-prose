@@ -65,23 +65,70 @@ function exibirMensagemAleatoria() {
     }
 }
 
+function recuperarQntReviews() {
+    let nmrFilmes = 0;
+    let nmrSeries = 0;
+    const userId = localStorage.getItem('id');
+
+    fetch(`http://localhost:8080/review/getAllReviews?idUser=${userId}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Erro na requisição: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log("Avaliações obtidas com sucesso:", data);
+
+            const reviews = data;
+
+            // Preencher cards de avaliações
+            reviews.forEach(review => {
+                if (review.tipoMidia === 'movie') {
+                    nmrFilmes++;
+                } else if (review.tipoMidia === 'tv') {
+                    nmrSeries++;
+                }
+            });
+            // Atualizar os valores no localStorage
+            localStorage.setItem('nmrFilmes', nmrFilmes);
+            localStorage.setItem('nmrSeries', nmrSeries);
+
+            console.log('Quantidade de filmes:', nmrFilmes);
+            console.log('Quantidade de séries:', nmrSeries);
+        })
+        .catch(error => {
+            console.error("Erro ao obter avaliações:", error.message);
+        });
+}
+
 function exibirInfoUsuario() {
     const token = localStorage.getItem('token');
     const infoFilmes = document.getElementById('infoFilmes');
     const infoSeries = document.getElementById('infoSeries');
     const btnLogin = document.getElementById('btnLogin');
+    const spanFilme = document.getElementById('spanFilmes');
+    const spanSerie = document.getElementById('spanSeries');
 
-    if (!token) { // se não tiver token, não exibirá as informações
+    if (!token) {
+        // Se não tiver token, não exibirá as informações
         infoFilmes.style.display = 'none';
         infoSeries.style.display = 'none';
-        btnLogin.style.display = 'block'; 
+        btnLogin.style.display = 'block';
     } else {
         // Se tiver token, exibir as informações
-        infoFilmes.style.display = 'block'; 
+        infoFilmes.style.display = 'block';
         infoSeries.style.display = 'block';
+
+        // Obter valores do localStorage ou definir como 0 se estiver vazio
+        const nmrFilmes = localStorage.getItem('nmrFilmes') || 0;
+        const nmrSeries = localStorage.getItem('nmrSeries') || 0;
+        spanFilme.innerHTML = nmrFilmes;
+        spanSerie.innerHTML = nmrSeries;
         btnLogin.style.display = 'none';
     }
 }
+
 
 
 function exibirNomeUsuario() {
@@ -106,7 +153,5 @@ window.addEventListener('load', () => {
     exibirMensagemAleatoria(mensagensAvaliacaoFilmes);
     exibirNomeUsuario();
     exibirInfoUsuario();
+    recuperarQntReviews();
 });
-
-
-

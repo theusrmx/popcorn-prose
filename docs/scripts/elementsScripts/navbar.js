@@ -65,6 +65,8 @@ function deslogar() {
     localStorage.removeItem('surname');
     localStorage.removeItem('nmrFilmes');
     localStorage.removeItem('nmrSeries');
+    localStorage.removeItem('totalReviews');
+
 
 
     window.location.href = 'login.html';

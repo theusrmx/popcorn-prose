@@ -86,6 +86,16 @@
     margin-right: 10px;
 }
 
+.iconPontos{
+    width: 50px;
+    height: auto;
+    margin-right: 10px;
+}
+
+.pontuacao{
+    margin-top: 10px;
+}
+
 .mascote_big{
     width: 250px;
     height: auto;

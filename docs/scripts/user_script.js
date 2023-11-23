@@ -103,26 +103,46 @@ function personalizarPerfil(){
 function enviarImagemParaBackend(imagem) {
     const userId = localStorage.getItem('id');
 
-    const formData = new FormData();
-    formData.append('fotoPerfil', imagem);
+    // Verificar se o arquivo é uma imagem JPEG, JPG ou PNG
+    const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+    if (!allowedTypes.includes(imagem.type)) {
+        console.error('Tipo de arquivo inválido. Por favor, escolha uma imagem JPEG, JPG ou PNG.');
+        return;
+    }
 
-    fetch(myAPIUrl + `/auth/adicionar-foto/${userId}`, {
-        method: 'PUT',
-        body: formData,
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error(`Erro na requisição: ${response.status}`);
+    // Verificar se o tamanho da imagem é menor ou igual a 250x250 pixels
+    const maxSize = 700; // Tamanho máximo em pixels
+    const image = new Image();
+    image.src = URL.createObjectURL(imagem);
+    image.onload = () => {
+        if (image.width > maxSize || image.height > maxSize) {
+            alert("Tente outra imagem!")
+            location.reload();
+            console.error('A imagem deve ter no máximo 500x500 pixels.');
+        } else {
+            const formData = new FormData();
+            formData.append('fotoPerfil', imagem);
+
+            fetch(myAPIUrl + `/auth/adicionar-foto/${userId}`, {
+                method: 'PUT',
+                body: formData,
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Erro na requisição: ${response.status}`);
+                }
+                return response.text();
+            })
+            .then(data => {
+                console.log('Resposta do servidor:', data);
+                atualizarFotoPerfil();
+            })
+            .catch(error => {
+                console.error('Erro ao enviar a foto:', error.message);
+                alert('Erro ao enviar a foto. Por favor, tente novamente mais tarde.');
+            });
         }
-        return response.text();
-    })
-    .then(data => {
-        console.log('Resposta do servidor:', data);
-        atualizarFotoPerfil();
-    })
-    .catch(error => {
-        console.error('Erro ao enviar a foto:', error.message);
-    });
+    };
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -133,17 +153,23 @@ document.addEventListener('DOMContentLoaded', () => {
         const file = event.target.files[0];
 
         if (file) {
-            const reader = new FileReader();
+            // Verificar se o arquivo é uma imagem antes de ler
+            if (file.type.startsWith('image/')) {
+                const reader = new FileReader();
 
-            reader.onload = (e) => {
-                const novaImagem = e.target.result;
-                fotoPerfil.src = novaImagem;
+                reader.onload = (e) => {
+                    const novaImagem = e.target.result;
+                    fotoPerfil.src = novaImagem;
 
-                // Aqui você pode adicionar lógica para enviar a imagem para o backend
-                enviarImagemParaBackend(file);
-            };
+                    // Aqui você pode adicionar lógica para enviar a imagem para o backend
+                    enviarImagemParaBackend(file);
+                };
 
-            reader.readAsDataURL(file);
+                reader.readAsDataURL(file);
+            } else {
+                console.error('Por favor, escolha um arquivo de imagem válido.');
+                alert('Por favor, escolha um arquivo de imagem válido.');
+            }
         }
     });
 });
@@ -185,9 +211,66 @@ function atualizarFotoPerfil() {
     });
 }
 
+////////////////////////////////////////////////////////////////////////////////////// PONTUAÇÃO //////////////////////////////////////////////////////////////////////////////////////
+const totalReviews = localStorage.getItem('totalReviews')
+function calcularPontuação(totalReviews){
+    const iconPontuacao = document.getElementById('iconPontuacao');
+    const textoPontuacao = document.getElementById('textoPontuacao');
+    const iconPadrao = document.getElementById('iconPadrao');
+
+    iconPadrao.style.display = 'none';
+
+    switch (true) {
+        case totalReviews < 10:
+            iconPontuacao.src = './assets/icons_pontuacao/icon1.png';
+            textoPontuacao.innerText = 'Iniciante do cinema';
+            break;
+        case totalReviews >= 10 && totalReviews < 20:
+            iconPontuacao.src = './assets/icons_pontuacao/icon2.png';
+            textoPontuacao.innerText = 'Cinéfilo em ascensão';
+            break;
+        case totalReviews >= 20 && totalReviews < 30:
+            iconPontuacao.src = './assets/icons_pontuacao/icon3.png';
+            textoPontuacao.innerText = 'Amante de filmes';
+            break;
+        case totalReviews >= 30 && totalReviews < 40:
+            iconPontuacao.src = './assets/icons_pontuacao/icon4.png';
+            textoPontuacao.innerText = 'Especialista da tela';
+            break;
+        case totalReviews >= 40 && totalReviews < 50:
+            iconPontuacao.src = './assets/icons_pontuacao/icon5.png';
+            textoPontuacao.innerText = 'Crítico de cinema';
+            break;
+        case totalReviews >= 50 && totalReviews < 60:
+            iconPontuacao.src = './assets/icons_pontuacao/icon6.png';
+            textoPontuacao.innerText = 'Gênio do cinema';
+            break;
+        case totalReviews >= 60 && totalReviews < 70:
+            iconPontuacao.src = './assets/icons_pontuacao/icon7.png';
+            textoPontuacao.innerText = 'Mestre da Sétima Arte';
+            break;
+        case totalReviews >= 70 && totalReviews < 80:
+            iconPontuacao.src = './assets/icons_pontuacao/icon8.png';
+            textoPontuacao.innerText = 'Mito dos filmes';
+            break;
+        case totalReviews >= 90 && totalReviews < 100:
+                iconPontuacao.src = './assets/icons_pontuacao/icon9.png';
+                textoPontuacao.innerText = 'Cinéfilo supremo';
+                break;
+        case totalReviews >= 100:
+                iconPontuacao.src = './assets/icons_pontuacao/icon10.png';
+                textoPontuacao.innerText = 'Lenda do filme';
+                break;
+        default:
+            iconPadrao.style.display = 'block';
+            break;
+    }
+}
+
 
 window.addEventListener('load', function() {
     minhasReviews();
     personalizarPerfil();
     atualizarFotoPerfil();
+    calcularPontuação(totalReviews);
 });

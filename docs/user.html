@@ -40,9 +40,15 @@
             <h1>Meu perfil</h1>
         </div>
         <div class="imagem_e_texto">
-            <img src="https://pbs.twimg.com/media/FnrdyXbWIAAf5VO.jpg" class="foto_perfil_usuario" alt="Foto de Perfil">
+            <div class="foto-container" style="min-height: 200px;">
+                <img src="assets/photopadrao.png" class="fotoPerfil" alt="Foto de Perfil">
+                <div class="overlay">
+                    <label for="minhaFoto" class="mudar-foto-btn">Escolher Foto</label>
+                    <input type="file" id="minhaFoto" class="mudarFoto" style="display: none;">
+                </div>
+            </div>
             <div class="usuario">
-                <h1>Carl Fredricksen</h1>
+                <h1 id="nomeUsuario">Seu nome</h1>
                 <a href="points.html">
                 <i class="fa-solid fa-trophy trofeu"></i>
                     <span class="pontuacao">Pontuação</span>

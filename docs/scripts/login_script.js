@@ -26,7 +26,8 @@ document.getElementById('formLogin').addEventListener('submit', function(event) 
         // Armazenar o token no localStorage
         localStorage.setItem('token', token);
         getName(token);
-        getID(token);        
+        getID(token);
+        getSurname(token);      
         // Redirecionar para a página principal
         window.location.href = 'index.html';
     })
@@ -63,6 +64,44 @@ function getName(token) {
             // Armazenar o nome no localStorage
             localStorage.setItem('name', name);
             return name;
+        })
+        .catch(error => {
+            console.error('Erro:', error.message);
+            return Promise.reject(error);
+        });
+    } catch (error) {
+        console.error('Erro:', error.message);
+        return Promise.reject(error);
+    }
+}
+
+// Função para obter o sobrenome do usuário do servidor
+function getSurname(token) {
+    try {
+        // Verificar se o token está presente
+        if (!token) {
+            console.error('O usuário não está autenticado.');
+            return Promise.reject(new Error('O usuário não está autenticado.'));
+        }
+
+        return fetch('http://localhost:8080/auth/get-surname', {
+            method: 'GET',
+            headers: {
+                'Authorization': token,
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                console.error('Erro ao obter o nome do usuário');
+                return Promise.reject(new Error('Erro ao obter o nome do usuário'));
+            }
+            return response.text();
+        })
+        .then(surname => {
+            console.log('Nome do usuário:', surname);
+            // Armazenar o nome no localStorage
+            localStorage.setItem('surname', surname);
+            return surname;
         })
         .catch(error => {
             console.error('Erro:', error.message);
@@ -119,9 +158,5 @@ function getID(token) {
         return Promise.reject(error);
     }
 }
-
-console.log(localStorage.getItem('name'))
-console.log(localStorage.getItem('id'))
-console.log(localStorage.getItem('token'))
 
 

@@ -1,4 +1,4 @@
-const myAPIUrl = "http://localhost:8080/review";
+const myAPIUrl = "http://localhost:8080";
 
 const userID = localStorage.getItem('id');
 const userName = localStorage.getItem('name');
@@ -11,7 +11,7 @@ console.log(userName);
 // Mostrar todas as minhas avaliações
 function minhasReviews() {
     // Fetch para a API REST
-    fetch(myAPIUrl + `/getAllReviews?idUser=${userID}`)
+    fetch(myAPIUrl + `/review/getAllReviews?idUser=${userID}`)
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Erro na requisição: ${response.status}`);
@@ -92,10 +92,102 @@ function criarEstrelas(numEstrelas) {
 
 
 ///////////////////////////////////////////////// PERSONALIZAÇÃO DO USUARIO ////////////////////////////////////////////////////////////////////////////////////
+function personalizarPerfil(){
+    const nomeUser = document.getElementById('nomeUsuario');
+    const nome = localStorage.getItem('name');
+    const sobrenome = localStorage.getItem('surname');
 
+    nomeUser.innerHTML = nome + ' ' + sobrenome;
+}
 
+function enviarImagemParaBackend(imagem) {
+    const userId = localStorage.getItem('id');
+
+    const formData = new FormData();
+    formData.append('fotoPerfil', imagem);
+
+    fetch(myAPIUrl + `/auth/adicionar-foto/${userId}`, {
+        method: 'PUT',
+        body: formData,
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`Erro na requisição: ${response.status}`);
+        }
+        return response.text();
+    })
+    .then(data => {
+        console.log('Resposta do servidor:', data);
+        atualizarFotoPerfil();
+    })
+    .catch(error => {
+        console.error('Erro ao enviar a foto:', error.message);
+    });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const fileInput = document.getElementById('minhaFoto');
+    const fotoPerfil = document.querySelector('.fotoPerfil');
+
+    fileInput.addEventListener('change', (event) => {
+        const file = event.target.files[0];
+
+        if (file) {
+            const reader = new FileReader();
+
+            reader.onload = (e) => {
+                const novaImagem = e.target.result;
+                fotoPerfil.src = novaImagem;
+
+                // Aqui você pode adicionar lógica para enviar a imagem para o backend
+                enviarImagemParaBackend(file);
+            };
+
+            reader.readAsDataURL(file);
+        }
+    });
+});
+
+function atualizarFotoPerfil() {
+    const userId = localStorage.getItem('id');
+    const token = localStorage.getItem('token');
+
+    // Faça a requisição para obter a nova foto de perfil
+    fetch(myAPIUrl + `/auth/getPhoto/${userId}`, {
+        method: 'GET',
+        headers: {
+            'Authorization': token,
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            console.error('Erro ao obter a foto do usuário');
+            throw new Error('Erro ao obter a foto do usuário');
+        }
+        return response.blob(); // Retorna a resposta como um objeto Blob
+    })
+    .then(photoBlob => {
+        // Converte o Blob para uma URL de dados (Data URL)
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onloadend = () => resolve(reader.result);
+            reader.onerror = reject;
+            reader.readAsDataURL(photoBlob);
+        });
+    })
+    .then(photoDataURL => {
+        // Atualize a imagem de perfil na interface do usuário
+        const fotoPerfil = document.querySelector('.fotoPerfil');
+        fotoPerfil.src = photoDataURL;
+    })
+    .catch(error => {
+        console.error('Erro:', error.message);
+    });
+}
 
 
 window.addEventListener('load', function() {
     minhasReviews();
+    personalizarPerfil();
+    atualizarFotoPerfil();
 });

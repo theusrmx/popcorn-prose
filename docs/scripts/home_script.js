@@ -93,9 +93,11 @@ function recuperarQntReviews() {
             // Atualizar os valores no localStorage
             localStorage.setItem('nmrFilmes', nmrFilmes);
             localStorage.setItem('nmrSeries', nmrSeries);
+            localStorage.setItem('totalReviews', nmrFilmes + nmrSeries);
+            console.log("Total reviews: " + localStorage.getItem('totalReviews'));
 
-            console.log('Quantidade de filmes:', nmrFilmes);
-            console.log('Quantidade de séries:', nmrSeries);
+            // Exibir as informações do usuário após recuperar as avaliações
+            exibirInfoUsuario();
         })
         .catch(error => {
             console.error("Erro ao obter avaliações:", error.message);
@@ -140,8 +142,7 @@ function exibirNomeUsuario() {
     }
 }
 
-console.log(localStorage.getItem('id'))
-console.log(localStorage.getItem('name'))
+console.log(localStorage.getItem('surname'));
 
 
 const slideShowHome = iniciarSlides(apiKey, BASE_URL, BASE_URL_LOGO, interval, 'slideHome', 'slide');
@@ -152,6 +153,6 @@ window.addEventListener('load', () => {
     slideShowHome();
     exibirMensagemAleatoria(mensagensAvaliacaoFilmes);
     exibirNomeUsuario();
-    exibirInfoUsuario();
     recuperarQntReviews();
+    exibirInfoUsuario(); 
 });

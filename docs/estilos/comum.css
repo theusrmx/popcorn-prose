@@ -47,6 +47,12 @@ body{
     color: #801f1f;
 }
 
+.navbar-nav .nav-link[href="login.html"]{
+    background-color: #147a04;
+    border-radius: 20px;
+    color: #fff;
+}
+
 .foto-perfil {
     width: 3em;
     height: 3em;

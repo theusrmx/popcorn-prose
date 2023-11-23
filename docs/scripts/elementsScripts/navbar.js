@@ -30,7 +30,13 @@ function adicionarLinksLoggedIn() {
 
     if (navbarNav) {
         const linkMeusFilmes = criarLink('user.html', 'Meus Filmes');
-        const linkDeslogar = criarLink('#', 'Deslogar', deslogar);
+        const linkDeslogar = criarLink('#', 'Sair', deslogar);
+
+        // Adiciona estilo ao linkDeslogar
+        linkDeslogar.style.backgroundColor = '#d83333';
+        linkDeslogar.style.color = '#000';
+        linkDeslogar.style.borderRadius = '20px';
+
 
         navbarNav.appendChild(linkMeusFilmes);
         navbarNav.appendChild(linkDeslogar);
@@ -56,8 +62,10 @@ function deslogar() {
     localStorage.removeItem('token');
     localStorage.removeItem('name');
     localStorage.removeItem('id');
+    localStorage.removeItem('surname');
     localStorage.removeItem('nmrFilmes');
     localStorage.removeItem('nmrSeries');
+
 
     window.location.href = 'login.html';
 }

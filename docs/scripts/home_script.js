@@ -93,6 +93,9 @@ function exibirNomeUsuario() {
     }
 }
 
+console.log(localStorage.getItem('id'))
+console.log(localStorage.getItem('name'))
+
 
 const slideShowHome = iniciarSlides(apiKey, BASE_URL, BASE_URL_LOGO, interval, 'slideHome', 'slide');
 

@@ -55,5 +55,6 @@ function deslogar() {
     // Remover o token e redirecionar para a página de login, por exemplo
     localStorage.removeItem('token');
     localStorage.removeItem('name');
+    localStorage.removeItem('id');
     window.location.href = 'login.html';
 }

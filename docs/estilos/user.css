@@ -110,6 +110,13 @@
 .desejos {
     flex: 1;
     padding: 40px;
+    
+}
+
+#cardAvaliacao,
+#cardLista{
+    max-height: 700px;
+    overflow-y: auto;
 }
 
 .card-avaliacao{
@@ -122,7 +129,6 @@
     padding: 10px;
     max-width: 1100px;
 
-    cursor: pointer;
     transition: all 0.3s ease-in-out;
 }
 
@@ -208,6 +214,15 @@
 
 .cadastro-a p{
     font-size: 5rem;
+}
+
+.semReviewText{
+    font-size: 2rem;
+    font-weight: 300;
+    font-style: italic;
+
+    padding: 0.2rem;
+
 }
 
 

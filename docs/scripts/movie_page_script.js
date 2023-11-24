@@ -1,6 +1,11 @@
 /*****************************************************API**********************************/
 const apiKey = '557439512040e55c35f758f339c8e1d1';
 
+const myAPIUrl = "http://localhost:8080";
+
+const userID = localStorage.getItem('id');
+const token = localStorage.getItem('token');
+
 // Obtenha o ID do filme ou série da URL
 const urlParams = new URLSearchParams(window.location.search);
 const filmeId = urlParams.get('id');
@@ -110,12 +115,12 @@ function montarPagina() {
           const dataLancamento = (data.release_date || data.first_air_date)?.substring(0, 4) || 'N/A'; // Ano de lançamento
           const sinopseFilme = data.overview; // Sinopse
           const posterPath = data.poster_path ? `https://image.tmdb.org/t/p/original/${data.poster_path}` : ''; //caminho do poster
-          //let googleProxyURL = 'https://images1-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&refresh=2592000&url='; //utliziando um server proxy para evitar problemas com crossorigin
+          let googleProxyURL = 'https://images1-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&refresh=2592000&url='; //utliziando um server proxy para evitar problemas com crossorigin
 
           //Manipulação DOM para inserir elementos da API na tela
           const posterFilme = document.getElementById('movie-poster');
           image.setAttribute('crossOrigin', 'anonymous');
-          posterFilme.src = posterPath;
+          posterFilme.src = googleProxyURL + posterPath;
           posterFilme.alt = `Poster: ${tituloFilme}`
 
           document.getElementById('movie-details-title').textContent = `${tituloFilme} - Popcorn Prose`; //Definiç~~ao title page de aordo com o nome do filme
@@ -204,24 +209,101 @@ function formatNumber(number) {
     }
 }
 
-function toggleListItem(item) {
-  // Toggle da classe 'selected' para mudar a cor de fundo
-  item.classList.toggle('selected');
+function tratarLista() {
+    const iconLista = document.getElementById('iconLista');
+    const textoLista = document.getElementById('my-list');
 
-  // Altere o texto de acordo com a presença da classe 'selected'
-  const pElement = item.querySelector('#my-list');
-  const iconElement = item.querySelector('i');
-  if (item.classList.contains('selected')) {
-    iconElement.classList.remove('fa-plus');
-    iconElement.classList.add('fa-check');
-    pElement.textContent = 'Na Minha Lista';
-  } else {
-    iconElement.classList.remove('fa-check');
-    iconElement.classList.add('fa-plus');
-    pElement.textContent = 'Minha Lista';
-  }
+    if (iconLista.classList.contains('fa-check')) {
+        // Se o filme estiver na lista, remova-o
+        removerFilme(filmeId);
+        iconLista.classList.remove('fa-check');
+        iconLista.classList.add('fa-plus');
+        textoLista.textContent = 'Minha Lista';
+    } else {
+        // Se o filme não estiver na lista, adicione-o
+        adicionarFilme(filmeId);
+        iconLista.classList.remove('fa-plus');
+        iconLista.classList.add('fa-check');
+        textoLista.textContent = 'Na Minha Lista';
+    }
 }
 
+function adicionarFilme(filmeId) {
+    const bodyRequest = {
+        "idUser": userID,
+        "idFilme": filmeId,
+        "tipoMidia": tipoMidia
+    }
+
+    fetch(myAPIUrl + `/lista-desejos/adicionar`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': token,
+        },
+        body: JSON.stringify(bodyRequest),
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert(data.mensagem);
+    })
+    .catch(error => {
+        console.error('Erro ao adicionar filme à lista:', error.message);
+    });
+}
+
+function removerFilme(filmeId) {
+    fetch(myAPIUrl + `/lista-desejos/deletar/${filmeId}/${userID}`, {
+        method: 'DELETE',
+        headers: {
+            'Authorization': token,
+        },
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert(data.mensagem);
+    })
+    .catch(error => {
+        console.error('Erro ao remover filme da lista:', error.message);
+    });
+}
+
+function verificarFilmeNaLista(filmeId) {
+    const iconLista = document.getElementById('iconLista');
+    const textoLista = document.getElementById('my-list');
+
+    fetch(myAPIUrl + `/lista-desejos/verificar/${userID}/${filmeId}`, {
+        method: 'GET',
+        headers: {
+            'Authorization': token,
+        },
+    })
+    .then(response => {
+        if (response.ok) {
+            iconLista.classList.remove('fa-plus');
+            iconLista.classList.add('fa-check');
+            textoLista.textContent = 'Na Minha Lista';
+            return response.json();
+        } else if (response.status === 404) {
+            iconLista.classList.remove('fa-check');
+            iconLista.classList.add('fa-plus');
+            textoLista.textContent = 'Minha Lista';
+            console.log("Filme não encontrado na lista de desejos");
+            return null;
+        } else {
+            throw new Error(`Erro na requisição: ${response.status}`);
+        }
+    })
+    .then(data => {
+        console.log("Filme encontrado na lista de desejos:", data);
+    })
+    .catch(error => {
+        console.error('Erro ao verificar filme na lista:', error.message);
+    });
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////Imagens//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const image = document.getElementById('movie-poster');
 const colorThief = new ColorThief();
@@ -312,5 +394,6 @@ function obterEstrelasSelecionadas() {
 
 window.addEventListener('load', () => {
   montarPagina();
+  verificarFilmeNaLista(filmeId);
 });
 

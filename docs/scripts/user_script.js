@@ -2,7 +2,7 @@ const myAPIUrl = "http://localhost:8080";
 
 const userID = localStorage.getItem('id');
 const userName = localStorage.getItem('name');
-
+const token = localStorage.getItem('token');
 const apiKey = '557439512040e55c35f758f339c8e1d1';
 
 console.log(userID);
@@ -31,6 +31,7 @@ function minhasReviews() {
         })
         .catch(error => {
             console.error("Erro ao obter avaliações:", error.message);
+            mostrarMensagemSemAvaliacoes();
         });
 }
 
@@ -41,45 +42,56 @@ function criarCardAvaliacao(avaliacao) {
 
     // Consulte a TMDB API para obter detalhes do filme, incluindo o poster
     fetch(`https://api.themoviedb.org/3/${avaliacao.tipoMidia}/${avaliacao.idFilme}?api_key=${apiKey}&language=pt-BR`)
-        .then(response => response.json())
-        .then(data => {
-            if (data.poster_path) {
-                const posterPath = data.poster_path;
-                const dataLancamento = (data.release_date || data.first_air_date)?.substring(0, 4) || 'N/A'; // Ano de lançamento
-                const tituloFilme = avaliacao.tipoMidia === 'movie' ? data.title : data.name; //verificação para qual dado recuperar, title (filmes) ou name (series)
+    .then(response => response.json())
+    .then(data => {
+        if (data.poster_path) {
+            const posterPath = data.poster_path;
+            const dataLancamento = (data.release_date || data.first_air_date)?.substring(0, 4) || 'N/A'; // Ano de lançamento
+            const tituloFilme = avaliacao.tipoMidia === 'movie' ? data.title : data.name; //verificação para qual dado recuperar, title (filmes) ou name (series)
 
-                // Preencha o conteúdo do card de avaliação
-                cardAvaliacao.innerHTML = `
-                    <div class="left-column">
-                        <img src="https://image.tmdb.org/t/p/w500${posterPath}" alt="Poster">
-                    </div>
-                    <div class="right-column">
-                        <h3 class="titulo-filme">${tituloFilme}<span>(${dataLancamento})</span></h3>
-                        <p class="comentario">${avaliacao.reviewFilme}</p>
+            // Preencha o conteúdo do card de avaliação
+            cardAvaliacao.innerHTML = `
+                <div class="left-column">
+                    <img src="https://image.tmdb.org/t/p/w500${posterPath}" alt="Poster">
+                </div>
+                <div class="right-column">
+                    <h3 class="titulo-filme">${tituloFilme}<span>(${dataLancamento})</span></h3>
+                    <p class="comentario">${avaliacao.reviewFilme}</p>
+                    <div class="rating">
                         <div class="rating">
-                            <div class="rating">
-                                ${criarEstrelas(avaliacao.numEstrelas)}
-                            </div>
-                        </div>
-                        <div class="ver_comentario">
-                            <a href="${`movie_page.html?id=${avaliacao.idFilme}&mediaType=${avaliacao.tipoMidia}`}" class="button-comentario">
-                                Ver Comentário
-                            </a>
+                            ${criarEstrelas(avaliacao.numEstrelas)}
                         </div>
                     </div>
-                `;
+                    <div class="ver_comentario">
+                        <a href="${`movie_page.html?id=${avaliacao.idFilme}&mediaType=${avaliacao.tipoMidia}`}" class="button-comentario">
+                            Ver Comentário
+                        </a>
+                    </div>
+                </div>
+            `;
 
-                // Adicione este card à sua página onde você quiser
-                document.getElementById('cardAvaliacao').appendChild(cardAvaliacao);
-            } else {
-                console.error("Erro ao obter detalhes do filme: Poster path não encontrado");
-            }
-        })
-        .catch(error => {
-            console.error("Erro ao obter detalhes do filme:", error.message);
-        });
+        // Adicione este card à sua página onde você quiser
+        document.getElementById('cardAvaliacao').appendChild(cardAvaliacao);
+        } else {
+            console.error("Erro ao obter detalhes do filme: Poster path não encontrado");
+        }
+    })
+    .catch(error => {
+        console.error("Erro ao obter detalhes do filme:", error.message);
+    });
+
 }
 
+function mostrarMensagemSemAvaliacoes() {
+    const cardAvaliacao = document.createElement('div');
+    cardAvaliacao.innerHTML = `<h4 class="semReviewText">Quando você avaliar um filme ou uma série, ele aparecerá aqui!</h4>`;
+    const cardContainer = document.getElementById('cardAvaliacao');
+    if (cardContainer) {
+        cardContainer.appendChild(cardAvaliacao);
+    } else {
+        console.error("Elemento 'cardAvaliacao' não encontrado no DOM.");
+    }
+}
 
 // Função para criar estrelas com base no número de estrelas
 function criarEstrelas(numEstrelas) {
@@ -90,6 +102,124 @@ function criarEstrelas(numEstrelas) {
     return estrelasHTML;
 }
 
+
+//Lista de desejos
+function minhaListaDesejos() {
+    // Fetch para a API REST
+    fetch(myAPIUrl + `/lista-desejos/listar/${userID}`, {
+        method: 'GET',
+        headers: {
+            'Authorization': token,
+        },
+    })
+    .then(response => {
+            if (!response.ok) {
+                throw new Error(`Erro na requisição: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log("Lista de desejos obtida com sucesso:", data);
+
+            // Suponho que o objeto retornado tenha uma propriedade chamada 'filmes' que é uma lista de filmes na lista de desejos
+            const filmesNaLista = data;
+
+            // Preencher cards da lista de desejos
+            filmesNaLista.forEach(filme => {
+                criarCardListaDesejos(filme);
+            });
+
+            // Verificar se a lista de desejos está vazia
+            if (!data || data.length === 0) {
+                mostrarMensagemSemDesejos();
+            }
+        })
+        .catch(error => {
+            console.error("Erro ao obter lista de desejos:", error.message);
+            mostrarMensagemSemDesejos();
+        });
+}
+
+function criarCardListaDesejos(filme) {
+    // Crie um card de lista de desejos
+    const cardDesejo = document.createElement('div');
+    cardDesejo.classList.add('card-avaliacao');
+
+    // Consulte a TMDB API para obter detalhes do filme, incluindo o poster
+    fetch(`https://api.themoviedb.org/3/${filme.tipoMidia}/${filme.idFilme}?api_key=${apiKey}&language=pt-BR`)
+    .then(response => response.json())
+    .then(data => {
+        if (data.poster_path) {
+            const posterPath = data.poster_path;
+            const dataLancamento = (data.release_date || data.first_air_date)?.substring(0, 4) || 'N/A'; // Ano de lançamento
+            const tituloFilme = filme.tipoMidia === 'movie' ? data.title : data.name; //verificação para qual dado recuperar, title (filmes) ou name (series)
+            const sinopse = data.overview;
+    // Preencha o conteúdo do card da lista de desejos
+    cardDesejo.innerHTML = `
+        <div class="left-column">
+            <img src="https://image.tmdb.org/t/p/w500${posterPath}" alt="Poster">
+        </div>
+        <div class="right-column">
+            <p class="titulo-filme">${tituloFilme}<span>(${dataLancamento})</span></p>
+            <p class="sinopse">${sinopse}</p>
+            <div>
+            
+            <a href="${`movie_page.html?id=${filme.idFilme}&mediaType=${filme.tipoMidia}`}" style="text-decoration: none">
+                <i class="fas fa-check" style="color: green; font-size: 30px; cursor: pointer; padding: 10px"></i>
+            </a>
+
+                <i class="fas fa-trash-alt" style="color: red; font-size: 30px; cursor: pointer; padding:10px" onclick="excluirItemLista(${filme.idFilme})"></i>
+            </div>
+
+        </div>
+    `;
+    
+    document.getElementById('cardLista').appendChild(cardDesejo);
+        } else {
+            console.error("Erro ao obter detalhes do filme: Poster path não encontrado");
+        }
+    })
+    .catch(error => {
+    console.error("Erro ao obter detalhes do filme:", error.message);
+    });
+}
+
+function mostrarMensagemSemDesejos() {
+    const cardDesejo = document.createElement('div');
+    cardDesejo.innerHTML = `<h4 class="semReviewText">Sua lista de desejos está vazia!</h4>`;
+    const cardContainer = document.getElementById('cardLista');
+    if (cardContainer) {
+        cardContainer.appendChild(cardDesejo);
+    } else {
+        console.error("Elemento 'cardDesejo' não encontrado no DOM.");
+    }
+}
+
+function excluirItemLista(idFilme) {
+    fetch(myAPIUrl + `/lista-desejos/deletar/${idFilme}/${userID}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': token,
+        },
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        // Se a exclusão for bem-sucedida, recarregue a página
+        if (data.mensagem === "Filme removido com sucesso") {
+            location.reload();
+        } else {
+            // Se houver um erro, exiba uma mensagem de erro ou realize outra ação apropriada
+            console.error(data.erro);
+            alert("Erro ao remover filme da lista");
+        }
+    })
+    .catch(error => {
+        console.error("Erro ao excluir filme:", error);
+        alert("Erro ao excluir filme");
+    });
+}
 
 ///////////////////////////////////////////////// PERSONALIZAÇÃO DO USUARIO ////////////////////////////////////////////////////////////////////////////////////
 function personalizarPerfil(){
@@ -110,12 +240,12 @@ function enviarImagemParaBackend(imagem) {
         return;
     }
 
-    // Verificar se o tamanho da imagem é menor ou igual a 250x250 pixels
-    const maxSize = 700; // Tamanho máximo em pixels
+    
+    const maxSize = 2000; // Tamanho máximo em pixels
     const image = new Image();
     image.src = URL.createObjectURL(imagem);
     image.onload = () => {
-        if (image.width > maxSize || image.height > maxSize) {
+        if (image.width > maxSize) {
             alert("Tente outra imagem!")
             location.reload();
             console.error('A imagem deve ter no máximo 500x500 pixels.');
@@ -270,6 +400,7 @@ function calcularPontuação(totalReviews){
 
 window.addEventListener('load', function() {
     minhasReviews();
+    minhaListaDesejos();
     personalizarPerfil();
     atualizarFotoPerfil();
     calcularPontuação(totalReviews);

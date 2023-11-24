@@ -229,50 +229,60 @@ function personalizarPerfil(){
 
     nomeUser.innerHTML = nome + ' ' + sobrenome;
 }
+async function enviarImagemParaBackend(imagem) {
+    try {
+        const userId = localStorage.getItem('id');
 
-function enviarImagemParaBackend(imagem) {
-    const userId = localStorage.getItem('id');
+        // Verificar se o arquivo é uma imagem JPEG, JPG ou PNG
+        const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+        if (!allowedTypes.includes(imagem.type)) {
+            console.error('Tipo de arquivo inválido. Por favor, escolha uma imagem JPEG, JPG ou PNG.');
+            return;
+        }
 
-    // Verificar se o arquivo é uma imagem JPEG, JPG ou PNG
-    const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
-    if (!allowedTypes.includes(imagem.type)) {
-        console.error('Tipo de arquivo inválido. Por favor, escolha uma imagem JPEG, JPG ou PNG.');
-        return;
-    }
+        const maxSize = 2000; // Tamanho máximo em pixels
+        const maxAspectRatio = 1.0; // Proporção largura/altura
+        const maxFileSize = 2 * 1024 * 1024; // 2 MB
 
-    
-    const maxSize = 2000; // Tamanho máximo em pixels
-    const image = new Image();
-    image.src = URL.createObjectURL(imagem);
-    image.onload = () => {
-        if (image.width > maxSize) {
+        const image = new Image();
+        image.src = URL.createObjectURL(imagem);
+
+        await new Promise(resolve => image.onload = resolve);
+
+        if (image.width > maxSize || image.height > maxSize || image.width / image.height > maxAspectRatio) {
             alert("Tente outra imagem!")
             location.reload();
-            console.error('A imagem deve ter no máximo 500x500 pixels.');
-        } else {
-            const formData = new FormData();
-            formData.append('fotoPerfil', imagem);
-
-            fetch(myAPIUrl + `/auth/adicionar-foto/${userId}`, {
-                method: 'PUT',
-                body: formData,
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`Erro na requisição: ${response.status}`);
-                }
-                return response.text();
-            })
-            .then(data => {
-                console.log('Resposta do servidor:', data);
-                atualizarFotoPerfil();
-            })
-            .catch(error => {
-                console.error('Erro ao enviar a foto:', error.message);
-                alert('Erro ao enviar a foto. Por favor, tente novamente mais tarde.');
-            });
+            console.error('A imagem deve ter no máximo 500x500 pixels e uma proporção aceitável.');
+            return;
         }
-    };
+
+        // Verificar tamanho total do arquivo (em bytes)
+        if (imagem.size > maxFileSize) {
+            console.error('O tamanho do arquivo excede o limite máximo de 2 MB.');
+            alert("Tente outra imagem!")
+            location.reload();
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('fotoPerfil', imagem);
+
+        const response = await fetch(myAPIUrl + `/auth/adicionar-foto/${userId}`, {
+            method: 'PUT',
+            body: formData,
+        });
+
+        if (!response.ok) {
+            throw new Error(`Erro na requisição: ${response.status}`);
+        }
+
+        const data = await response.text();
+        console.log('Resposta do servidor:', data);
+        atualizarFotoPerfil();
+    } catch (error) {
+        console.error('Erro ao enviar a foto:', error.message);
+        alert('Erro ao enviar a foto. Por favor, tente novamente mais tarde.');
+    }
 }
 
 document.addEventListener('DOMContentLoaded', () => {

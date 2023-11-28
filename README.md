@@ -22,13 +22,14 @@ O Popcorn Prose é um site que permite aos usuários avaliar filmes ou séries, 
     -   Ganhe pontos e aumente seu nível à medida que realiza mais avaliações, contribuindo para a comunidade e enriquecendo a experiência de todos.
 
 ## 🛠 Tecnologias 
-- HTML
-- CSS
-- JavaScript
-- [Bootstrap](https://getbootstrap.com/) 
-- 🔗[Java - Backend](https://github.com/theusrmx/popcorn-prose-server) - Acesse nosso repositório e descubra mais sobre o Popcorn Prose.
+- <img align="center" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-plain.svg"> HTML
+- <img align="center" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-plain.svg"> CSS
+- <img align="center" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-plain.svg"> JavaScript 
+- <img align="center" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/bootstrap/bootstrap-plain.svg"> [Bootstrap](https://getbootstrap.com/) 
+- <img align="center" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-plain.svg"> [Java - Backend](https://github.com/theusrmx/popcorn-prose-server) - Acesse nosso repositório e descubra mais sobre o Popcorn Prose.
 
-## Equipe
+
+## 💻 Equipe
 - [Matheus Ramos Marcolino](https://github.com/theusrmx)
 - [Miguel Leme](https://github.com/MiguelLeme)
 - [Talita Almeida](https://github.com/talitaalmeida2023)

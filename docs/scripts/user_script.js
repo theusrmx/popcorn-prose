@@ -1,4 +1,5 @@
 const myAPIUrl = "http://localhost:8080";
+//const myAPIUrl = "https://popcorn-prose-server.vercel.app";
 
 const userID = localStorage.getItem('id');
 const userName = localStorage.getItem('name');
@@ -62,11 +63,10 @@ function criarCardAvaliacao(avaliacao) {
                             ${criarEstrelas(avaliacao.numEstrelas)}
                         </div>
                     </div>
-                    <div class="ver_comentario">
-                        <a href="${`movie_page.html?id=${avaliacao.idFilme}&mediaType=${avaliacao.tipoMidia}`}" class="button-comentario">
-                            Ver Comentário
-                        </a>
-                    </div>
+                    <a href="${`movie_page.html?id=${avaliacao.idFilme}&mediaType=${avaliacao.tipoMidia}`}" style="text-decoration: none">
+                    <i class="fas fa-pen" style="color: green; font-size: 30px; cursor: pointer; padding: 10px"></i>
+                    </a>
+                    <i class="fas fa-trash-alt" style="color: red; font-size: 30px; cursor: pointer; padding:10px" onclick="excluirReview(${avaliacao.idFilme})"></i>
                 </div>
             `;
 
@@ -168,7 +168,7 @@ function criarCardListaDesejos(filme) {
                 <i class="fas fa-check" style="color: green; font-size: 30px; cursor: pointer; padding: 10px"></i>
             </a>
 
-                <i class="fas fa-trash-alt" style="color: red; font-size: 30px; cursor: pointer; padding:10px" onclick="excluirItemLista(${filme.idFilme})"></i>
+            <i class="fas fa-trash-alt" style="color: red; font-size: 30px; cursor: pointer; padding:10px" onclick="excluirItemLista(${filme.idFilme})"></i>
             </div>
 
         </div>
@@ -218,6 +218,31 @@ function excluirItemLista(idFilme) {
     .catch(error => {
         console.error("Erro ao excluir filme:", error);
         alert("Erro ao excluir filme");
+    });
+}
+
+function excluirReview(idFilme){
+    if (!confirm("Tem certeza de que deseja excluir essa review?")) {
+        return;
+    }
+
+    fetch(myAPIUrl + `/review/deleteReview?idFilme=${idFilme}&idUser=${userID}`, {
+        method: 'DELETE'
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Erro ao excluir review.');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Review excluída com sucesso:', data);
+        alert("Review excluída com sucesso!");
+        location.reload();
+    })
+    .catch(error => {
+        console.error('Erro ao excluir review:', error.message);
+        alert("Ocorreu um erro ao excluir a review.");
     });
 }
 

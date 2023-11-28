@@ -1,3 +1,7 @@
+const myAPIUrl = 'http://localhost:8080';
+//const myAPIUrl = "https://popcorn-prose-server.vercel.app";
+
+
 document.getElementById('formLogin').addEventListener('submit', function(event) {
     event.preventDefault();
 
@@ -9,7 +13,7 @@ document.getElementById('formLogin').addEventListener('submit', function(event) 
         senha: senha
     };
 
-    fetch('http://localhost:8080/auth/login', {
+    fetch(myAPIUrl + '/auth/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -55,7 +59,7 @@ function getName(token) {
             return Promise.reject(new Error('O usuário não está autenticado.'));
         }
 
-        return fetch('http://localhost:8080/auth/get-name', {
+        return fetch(myAPIUrl + '/auth/get-name', {
             method: 'GET',
             headers: {
                 'Authorization': token,
@@ -93,7 +97,7 @@ function getSurname(token) {
             return Promise.reject(new Error('O usuário não está autenticado.'));
         }
 
-        return fetch('http://localhost:8080/auth/get-surname', {
+        return fetch(myAPIUrl + '/auth/get-surname', {
             method: 'GET',
             headers: {
                 'Authorization': token,
@@ -131,7 +135,7 @@ function getID(token) {
             return Promise.reject(new Error('O usuário não está autenticado.'));
         }
 
-        return fetch('http://localhost:8080/auth/get-id', {
+        return fetch(myAPIUrl + '/auth/get-id', {
             method: 'GET',
             headers: {
                 'Authorization': token,

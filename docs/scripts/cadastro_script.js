@@ -1,3 +1,7 @@
+const myAPIUrl = "http://localhost:8080";
+//const myAPIUrl = "https://popcorn-prose-server.vercel.app";
+
+
 //Realizar cadastro
 document.getElementById('formCadastro').addEventListener('submit', function(event) {
     event.preventDefault(); // Impede o envio padrão do formulário
@@ -17,7 +21,7 @@ document.getElementById('formCadastro').addEventListener('submit', function(even
     };
 
     // Faz a solicitação fetch
-    fetch('http://localhost:8080/auth/cadastrar', {
+    fetch(myAPIUrl + '/auth/cadastrar', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

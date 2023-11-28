@@ -5,6 +5,9 @@ const BASE_URL = 'https://image.tmdb.org/t/p/original/';
 const BASE_URL_LOGO = 'https://image.tmdb.org/t/p/original/';
 let interval = 5000;
 
+const myAPIUrl = "http://localhost:8080";
+//const myAPIUrl = "https://popcorn-prose-server.vercel.app";
+
 
 //Função para carrregar conteudo popular de acordo com o paramento TIPO MIDIA - TV OU MOVIE
 function carregarConteudoPopular(tipoMidia, elementoHTML) {
@@ -70,7 +73,7 @@ function recuperarQntReviews() {
     let nmrSeries = 0;
     const userId = localStorage.getItem('id');
 
-    fetch(`http://localhost:8080/review/getAllReviews?idUser=${userId}`)
+    fetch(myAPIUrl + `/review/getAllReviews?idUser=${userId}`)
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Erro na requisição: ${response.status}`);

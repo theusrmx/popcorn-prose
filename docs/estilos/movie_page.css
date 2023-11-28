@@ -155,6 +155,10 @@
     transform: translateY(2px);
 }
 
+#btnEditarReview, #btnEnviarEditarReview{
+    background-color: #147a04;
+}
+
 .info-container {
     color: #ffffff;
     padding: 10px;

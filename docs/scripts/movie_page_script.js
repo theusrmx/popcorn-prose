@@ -2,6 +2,7 @@
 const apiKey = '557439512040e55c35f758f339c8e1d1';
 
 const myAPIUrl = "http://localhost:8080";
+//const myAPIUrl = "https://popcorn-prose-server.vercel.app";
 
 const userID = localStorage.getItem('id');
 const token = localStorage.getItem('token');
@@ -10,6 +11,15 @@ const token = localStorage.getItem('token');
 const urlParams = new URLSearchParams(window.location.search);
 const filmeId = urlParams.get('id');
 const tipoMidia = urlParams.get('mediaType');
+
+// Elementos gerais
+const reviewInput = document.getElementById('reviewInput'); //campo de review
+const btnEnviarReview = document.getElementById('btnEnviarReview'); //botao de enviar
+const btnEditarReview = document.getElementById('btnEditarReview'); //botao de habilitar edição
+const btnEnviarEditarReview = document.getElementById('btnEnviarEditarReview'); //botao de enviar a edição (fetch)
+const btnDeletarReview = document.getElementById('btnDeletarReview'); //botao de deletar uma review
+const ratingStars = document.getElementsByClassName('rating__star'); //estrelas
+const labelReview = document.getElementById('labelForReview'); // Texto em cima do campo de review
 
 const options = {
   method: 'GET',
@@ -31,11 +41,12 @@ if (!filmeId) {
 }
 
 function montarPagina() {
+  
   //Consulta na API referente ao filme clicado.
   fetch(`https://api.themoviedb.org/3/${tipoMidia}/${filmeId}?language=pt-BR`, options)
       .then(response => response.json())
       .then(data => {
-          // Adapte para incluir a verificação da revisão existente
+          // Adapte para incluir a verificação da review existente
           const checkReviewData = {
               idFilme: filmeId,
               idUser: localStorage.getItem('id')
@@ -51,16 +62,15 @@ function montarPagina() {
               })
               .then(existingReview => {
                 if (existingReview) {
-                  console.log('Revisão existente:', existingReview);
-          
-                  const reviewInput = document.getElementById('reviewInput');
-                  const ratingStars = document.getElementsByClassName('rating__star');
-                  const labelReview = document.getElementById('labelForReview');
+                  console.log('review existente:', existingReview);
           
                   reviewInput.value = existingReview.reviewFilme;
                   labelReview.innerHTML = "Sua opinião:";
                   btnEnviarReview.style.display = 'none';
-          
+                  btnEnviarEditarReview.style.display = 'none'
+                  btnEditarReview.style.display = 'inline-block';
+                  btnDeletarReview.style.display = 'inline-block';
+
                   reviewInput.disabled = true;
           
                   executeRating(Array.from(ratingStars), existingReview);
@@ -72,7 +82,7 @@ function montarPagina() {
           
               })
               .catch(error => {
-                  console.error('Erro ao verificar revisão:', error.message);
+                  console.error('Erro ao verificar review:', error.message);
                  
               });
 
@@ -141,18 +151,18 @@ function montarPagina() {
           document.getElementById('genre').textContent = generoFilme;
           document.getElementById('release-year').textContent = dataLancamento;
           document.getElementById('rating').textContent = notaFilme.toFixed(1);
+          btnEditarReview.style.display = 'none';
+          btnEnviarEditarReview.style.display = 'none';
+          btnDeletarReview.style.display = 'none';
       })
       .catch(error => {
           console.error('Erro ao carregar os detalhes do filme ou série:', error);
       });
 
-  //BOTAO PARA ENVIAR REVIEW
-  const btnEnviarReview = document.getElementById('btnEnviarReview');
 
-  // Adicione um listener para o evento de clique no botão
+  //Evento do botão para enviar a review
   btnEnviarReview.addEventListener('click', function () {
       // Obtenha o conteúdo da textarea
-      const reviewInput = document.getElementById('reviewInput');
       const conteudoReview = reviewInput.value;
       // Obtenha o número de estrelas selecionadas
       const estrelasSelecionadas = obterEstrelasSelecionadas();
@@ -194,6 +204,81 @@ function montarPagina() {
   });
 }
 
+//Evento do botão para habilitar a edição da review
+btnEditarReview.addEventListener('click', function(){
+    // Habilita a edição da review
+    reviewInput.disabled = false;
+
+    // Reativa o clique nas estrelas
+    executeRating(Array.from(ratingStars));
+
+    // Exibe o botão de enviar edição e desabilita os demais
+    btnEnviarEditarReview.style.display = 'inline-block';
+    btnEditarReview.style.display = 'none';
+    btnDeletarReview.style.display = 'none';
+    labelReview.innerHTML = "Editar sua opinião:";
+    
+});
+
+//Evento do botão para enviar o conteúdo editado
+btnEnviarEditarReview.addEventListener('click', function(){
+    const conteudoReview = reviewInput.value;
+    const estrelasSelecionadas = obterEstrelasSelecionadas();
+
+    const editReviewData = {
+        reviewFilme: conteudoReview,
+        numEstrelas: estrelasSelecionadas
+    };
+    
+    // Faça a requisição PUT para o backend
+    fetch(myAPIUrl + `/review/editReview?idFilme=${filmeId}&idUser=${userID}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(editReviewData)
+    })
+    .then(response => response.text())
+    .then(responseText => {
+        console.log(responseText); // Examine o conteúdo retornado antes do JSON.parse()
+        return JSON.parse(responseText);
+    })
+    .then(data => {
+        console.log('Review editada com sucesso:', data);
+        alert("Review editada com sucesso!");
+        location.reload();
+    })
+    .catch(error => {
+        console.error('Erro ao editar review:', error.message);
+        alert("Ocorreu um erro ao editar a review.");
+    });
+});
+
+//Evento do botão para excluir uma review
+btnDeletarReview.addEventListener('click', function(){
+    if (!confirm("Tem certeza de que deseja excluir essa review?")) {
+        return;
+    }
+
+    fetch(myAPIUrl + `/review/deleteReview?idFilme=${filmeId}&idUser=${userID}`, {
+        method: 'DELETE'
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Erro ao excluir review.');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Review excluída com sucesso:', data);
+        alert("Review excluída com sucesso!");
+        location.reload();
+    })
+    .catch(error => {
+        console.error('Erro ao excluir review:', error.message);
+        alert("Ocorreu um erro ao excluir a review.");
+    });
+});
 
 const imagesToLoad = 2; // Defina o número total de imagens a serem carregadas
 let loadedImages = 0;
@@ -341,14 +426,19 @@ function checkIfAllImagesLoaded() { //function para administrar o loading das im
     }
   }
 
-
-  function executeRating(stars, existingReview) {
+function executeRating(stars, existingReview) {
     const starClassActive = 'rating__star fas fa-star';
     const starClassInactive = 'rating__star far fa-star';
 
+    function setStars(num) {
+        for (let i = 0; i < stars.length; i++) {
+            stars[i].className = i < num ? starClassActive : starClassInactive;
+        }
+    }
+
     stars.forEach((star, index) => {
-        star.onclick = () => {
-            if (!existingReview) {
+        if (!existingReview) {
+            star.onclick = () => {
                 const selectedStars = stars.slice(0, index + 1);
                 const unselectedStars = stars.slice(index + 1);
 
@@ -359,23 +449,15 @@ function checkIfAllImagesLoaded() { //function para administrar o loading das im
                 unselectedStars.forEach(unselectedStar => {
                     unselectedStar.className = starClassInactive;
                 });
-            }
-        };
+            };
+        } else {
+            star.onclick = null; // Desativa o clique se estiver editando
+
+            // Configura as estrelas com base na review existente
+            setStars(existingReview.numEstrelas);
+        }
     });
-
-    if (existingReview) {
-      stars.forEach((star, index) => {
-          if (index < existingReview.numEstrelas) {
-              star.classList.remove('far');
-              star.classList.add('fas');
-          } else {
-              star.onclick = null;
-          }
-          star.style.pointerEvents = 'none'; // Adiciona esta linha para desativar o clique
-      });
-    }
 }
-
 
 
 // Função para obter o número de estrelas selecionadas

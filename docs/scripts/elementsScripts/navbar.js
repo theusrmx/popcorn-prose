@@ -1,4 +1,3 @@
-// navbar.js
 document.addEventListener('DOMContentLoaded', function() {
     gerenciarEstadoLogin();
 });
@@ -58,7 +57,7 @@ function criarLink(href, text, clickHandler) {
 
 function deslogar() {
     // Lógica para deslogar o usuário
-    // Remover o token e redirecionar para a página de login, por exemplo
+    // Remover o token e redirecionar para a página de login
     localStorage.removeItem('token');
     localStorage.removeItem('name');
     localStorage.removeItem('id');

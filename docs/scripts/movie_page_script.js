@@ -323,8 +323,7 @@ function adicionarFilme(filmeId) {
     fetch(myAPIUrl + `/lista-desejos/adicionar`, {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json',
-            'Authorization': token,
+            'Content-Type': 'application/json'
         },
         body: JSON.stringify(bodyRequest),
     })
@@ -339,10 +338,7 @@ function adicionarFilme(filmeId) {
 
 function removerFilme(filmeId) {
     fetch(myAPIUrl + `/lista-desejos/deletar/${filmeId}/${userID}`, {
-        method: 'DELETE',
-        headers: {
-            'Authorization': token,
-        },
+        method: 'DELETE'
     })
     .then(response => response.json())
     .then(data => {
@@ -358,10 +354,7 @@ function verificarFilmeNaLista(filmeId) {
     const textoLista = document.getElementById('my-list');
 
     fetch(myAPIUrl + `/lista-desejos/verificar/${userID}/${filmeId}`, {
-        method: 'GET',
-        headers: {
-            'Authorization': token,
-        },
+        method: 'GET'
     })
     .then(response => {
         if (response.ok) {

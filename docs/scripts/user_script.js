@@ -197,8 +197,7 @@ function excluirItemLista(idFilme) {
     fetch(myAPIUrl + `/lista-desejos/deletar/${idFilme}/${userID}`, {
         method: 'DELETE',
         headers: {
-            'Content-Type': 'application/json',
-            'Authorization': token,
+            'Content-Type': 'application/json'
         },
     })
     .then(response => response.json())

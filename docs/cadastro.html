@@ -16,7 +16,7 @@
 
     <main>
         <section id="login">
-            <form action="" method="post" autocomplete="on">
+            <form action="#" method="post" autocomplete="on" id="formCadastro">
                 <div class="wrapper">
                     <a class="go-home" href="index.html">
                         <h1 class="nome-site">Popcorn Prose</h1>
@@ -30,7 +30,7 @@
                         
                         <div class="campo">
                             <i class="fa-solid fa-user"></i>
-                            <input type="text" name="sobrenome" id="iSnome" placeholder="Sobrenome" required maxlength="15">
+                            <input type="text" name="sobrenome" id="iSnome" placeholder="Sobrenome" required maxlength="45">
                         </div>
                         
                         <div class="campo">
@@ -59,6 +59,7 @@
                             <i class="fa-solid fa-venus-mars"></i>
                             <label for="genero">Gênero:</label>
                             <select name="genero" id="genero" required>
+                                <option value="" disabled selected>Selecione uma opção</option>
                                 <option value="masculino">Masculino</option>
                                 <option value="feminino">Feminino</option>
                                 <option value="outro">Outro</option>
@@ -76,14 +77,15 @@
             </form>       
         </section>
 
-        <section id="wallpaper">
+        <div id="wallpaper">
             <div id="background-loader"></div>
             <div id="loader"></div>
-        </section>
+        </div>
 
     </main>
 
-    <script type="module" src="scripts/login_script.js"></script>
+    <script type="module" src="scripts/login_slides.js"></script>
+    <script src="scripts/cadastro_script.js"></script>
 </body>
 
 </html>

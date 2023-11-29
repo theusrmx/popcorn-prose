@@ -55,6 +55,8 @@
     font-size: 14px;
 
     padding: 20px;
+
+    margin-top: 10px;
 }
 
 .btn-newreview i{
@@ -66,7 +68,7 @@
 }
 .carousel-inner .carousel-item img {
     max-width: 100%;
-    max-height: auto;
+    height: auto;
 }
   
 .carousel {

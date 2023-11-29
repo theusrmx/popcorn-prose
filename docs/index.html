@@ -29,9 +29,6 @@
           <li class="nav-item">
             <a class="nav-link" href="search.html">Busca</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="user.html">Meus Filmes</a>
-          </li> <!--Na versão final login e meus filmes nao estarao juntos, pois meus filmes seria a página do usuario logado-->
             <li class="nav-item">
                 <a class="nav-link" href="login.html">Login</a>
             </li>
@@ -45,13 +42,16 @@
     <section class="top-banner">
         <div class="coluna-esquerda">
           <div class="welcome-message">
-            <h1>Bem vindo, John!</h1>
-            <h4 id="mensagemUser"></h4>
+            <h1>Bem vindo ao Popcorn Prose!</h1>
+            <h4 id="mensagemUser"><!--Mensagens adicionadas via JS.--></h4>
           </div>
       
           <div class="info-user">
-            <h4><i class="fa-solid fa-clapperboard"></i>23 filmes</h4>
-            <h4><i class="fa-solid fa-tv"></i>10 séries</h4>
+            <h4 id="infoFilmes"><i class="fa-solid fa-clapperboard"></i><span id="spanFilmes"></span> Filmes</h4>
+            <h4 id="infoSeries"><i class="fa-solid fa-tv" ></i><span id="spanSeries"></span> séries</h4>
+            <a href="login.html" class="btn-newreview" id="btnLogin">
+              <i class="fa-solid fa-user"></i>Fazer login
+            </a>
             <a href="search.html" class="btn-newreview">
               <i class="fa-solid fa-magnifying-glass"></i>Buscar filme
             </a>
@@ -68,7 +68,9 @@
         <section class="popular-movies">
             <div>
                 <h2>Filmes populares</h2>
-                <div class="movie-cards"></div>
+                <div class="movie-cards">
+                  <!--Filmes adicionados via JS.-->
+                </div>
             </div>
         </section>
     
@@ -77,7 +79,10 @@
         <section class="popular-series">
             <div>
                 <h2>Séries populares</h2>
-                <div class="series-cards"></div>
+                <div class="series-cards">
+                  <!--Séries adicionadas via JS.-->
+                </div>
+
             </div>
        
         </section>
@@ -88,5 +93,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script type="module" src="scripts/home_script.js"></script>
+    <script src="scripts/elementsScripts/navbar.js"></script>
 </body>
 </html>

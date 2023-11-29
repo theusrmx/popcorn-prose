@@ -30,11 +30,8 @@
                 <a class="nav-link" href="search.html">Busca</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="user.html">Meus Filmes</a>
-              </li> <!--Na versão final login e meus filmes nao estarao juntos, pois meus filmes seria a página do usuario logado-->
-                <li class="nav-item">
-                    <a class="nav-link" href="login.html">Login</a>
-                </li>
+                <a class="nav-link" href="login.html">Login</a>
+              </li>
             </ul>
         </div>
       </header> 
@@ -42,21 +39,21 @@
       <div id="background-loader"></div>
       <div id="loader"></div>
 
-      <section class="search-bar">
-          <input type="text" placeholder="Buscar filme ou série">
-          <button id="searchButton"><i class="fa-solid fa-magnifying-glass"></i></button>
-      </section>
-
     
+      <section class="search-results">  
+          <div class="search-bar">
+            <input type="text" placeholder="Buscar filme ou série">
+            <button id="searchButton"><i class="fa-solid fa-magnifying-glass"></i></button>
+          </div>
 
-    <section class="search-results">  
-        <h1 id="search-header"></h1>
-        <div id="search-results"></div>
-    </section>
+          <h2 id="search-header">Filmes e séries populares</h2>
+          <div id="search-results"></div>
+      </section>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="scripts/search_script.js"></script>
+    <script src="scripts/elementsScripts/navbar.js"></script>
 </body>
 </html>

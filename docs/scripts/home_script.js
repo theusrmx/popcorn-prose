@@ -5,6 +5,9 @@ const BASE_URL = 'https://image.tmdb.org/t/p/original/';
 const BASE_URL_LOGO = 'https://image.tmdb.org/t/p/original/';
 let interval = 5000;
 
+const myAPIUrl = "http://localhost:8080";
+//const myAPIUrl = "https://popcorn-prose-server.vercel.app";
+
 
 //Função para carrregar conteudo popular de acordo com o paramento TIPO MIDIA - TV OU MOVIE
 function carregarConteudoPopular(tipoMidia, elementoHTML) {
@@ -35,10 +38,6 @@ function carregarConteudoPopular(tipoMidia, elementoHTML) {
                 });
 
                 elemento.appendChild(midiaCard);
-                
-                //Retirar loader ao carregar a página
-                //loadingBackground.style.display = 'none';
-                //loadingIndicator.style.display = 'none';
             });
         })
         .catch(error => {
@@ -58,12 +57,95 @@ const mensagensAvaliacaoFilmes = [
     "Luz, câmera, ação!"
 ];
   
-  function exibirMensagemAleatoria() {
+function exibirMensagemAleatoria() {
+    const token = localStorage.getItem('token');
     let mensagemElement = document.getElementById('mensagemUser');
-    const indiceAleatorio = Math.floor(Math.random() * mensagensAvaliacaoFilmes.length);
-    mensagemElement.innerHTML = `${mensagensAvaliacaoFilmes[indiceAleatorio]}`
-    //console.log(mensagensAvaliacaoFilmes[indiceAleatorio]);
+    if(token){//se estiver logado, exibir a mensagem aleatória
+        const indiceAleatorio = Math.floor(Math.random() * mensagensAvaliacaoFilmes.length);
+        mensagemElement.innerHTML = `${mensagensAvaliacaoFilmes[indiceAleatorio]}`;
+    }else{
+        mensagemElement.innerHTML = "Faça o login para começar (ou continuar) seu diário cinematográfico!";
+    }
 }
+
+function recuperarQntReviews() {
+    let nmrFilmes = 0;
+    let nmrSeries = 0;
+    const userId = localStorage.getItem('id');
+
+    fetch(myAPIUrl + `/review/getAllReviews?idUser=${userId}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Erro na requisição: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log("Avaliações obtidas com sucesso:", data);
+
+            const reviews = data;
+
+            // Preencher cards de avaliações
+            reviews.forEach(review => {
+                if (review.tipoMidia === 'movie') {
+                    nmrFilmes++;
+                } else if (review.tipoMidia === 'tv') {
+                    nmrSeries++;
+                }
+            });
+            // Atualizar os valores no localStorage
+            localStorage.setItem('nmrFilmes', nmrFilmes);
+            localStorage.setItem('nmrSeries', nmrSeries);
+            localStorage.setItem('totalReviews', nmrFilmes + nmrSeries);
+            console.log("Total reviews: " + localStorage.getItem('totalReviews'));
+
+            // Exibir as informações do usuário após recuperar as avaliações
+            exibirInfoUsuario();
+        })
+        .catch(error => {
+            console.error("Erro ao obter avaliações:", error.message);
+        });
+}
+
+function exibirInfoUsuario() {
+    const token = localStorage.getItem('token');
+    const infoFilmes = document.getElementById('infoFilmes');
+    const infoSeries = document.getElementById('infoSeries');
+    const btnLogin = document.getElementById('btnLogin');
+    const spanFilme = document.getElementById('spanFilmes');
+    const spanSerie = document.getElementById('spanSeries');
+
+    if (!token) {
+        // Se não tiver token, não exibirá as informações
+        infoFilmes.style.display = 'none';
+        infoSeries.style.display = 'none';
+        btnLogin.style.display = 'block';
+    } else {
+        // Se tiver token, exibir as informações
+        infoFilmes.style.display = 'block';
+        infoSeries.style.display = 'block';
+
+        // Obter valores do localStorage ou definir como 0 se estiver vazio
+        const nmrFilmes = localStorage.getItem('nmrFilmes') || 0;
+        const nmrSeries = localStorage.getItem('nmrSeries') || 0;
+        spanFilme.innerHTML = nmrFilmes;
+        spanSerie.innerHTML = nmrSeries;
+        btnLogin.style.display = 'none';
+    }
+}
+
+
+
+function exibirNomeUsuario() {
+    const nomeUsuario = localStorage.getItem('name');
+    const welcomeMessage = document.querySelector('.welcome-message h1');
+
+    if (nomeUsuario && welcomeMessage) {
+        welcomeMessage.textContent = `Bem vindo, ${nomeUsuario}!`;
+    }
+}
+
+console.log(localStorage.getItem('surname'));
 
 
 const slideShowHome = iniciarSlides(apiKey, BASE_URL, BASE_URL_LOGO, interval, 'slideHome', 'slide');
@@ -73,5 +155,7 @@ window.addEventListener('load', () => {
     carregarConteudoPopular('tv', '.series-cards');
     slideShowHome();
     exibirMensagemAleatoria(mensagensAvaliacaoFilmes);
+    exibirNomeUsuario();
+    recuperarQntReviews();
+    exibirInfoUsuario(); 
 });
-  

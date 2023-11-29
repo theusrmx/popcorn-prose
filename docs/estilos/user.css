@@ -19,11 +19,44 @@
     align-items: center;
 }
 
-.foto_perfil_usuario {
+.fotoPerfil {
     width: 250px;
     height: auto;
     border-radius: 50%;
     margin: 20px;
+}
+
+.foto-container {
+    position: relative;
+    display: inline-block;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0; /* Inicialmente transparente */
+    transition: opacity 0.3s ease; /* Adiciona uma transição suave para a opacidade */
+
+    border-radius: 50%;
+}
+
+.foto-container:hover .overlay {
+    opacity: 1; /* Torna o overlay visível ao passar o mouse sobre a foto */
+}
+
+.overlay label {
+    background-color: var(--vermelho-principal);
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 .usuario {
@@ -53,6 +86,16 @@
     margin-right: 10px;
 }
 
+.iconPontos{
+    width: 100px;
+    height: auto;
+    margin-right: 10px;
+}
+
+.pontuacao{
+    margin-top: 10px;
+}
+
 .mascote_big{
     width: 250px;
     height: auto;
@@ -67,6 +110,13 @@
 .desejos {
     flex: 1;
     padding: 40px;
+    
+}
+
+#cardAvaliacao,
+#cardLista{
+    max-height: 700px;
+    overflow-y: auto;
 }
 
 .card-avaliacao{
@@ -79,7 +129,6 @@
     padding: 10px;
     max-width: 1100px;
 
-    cursor: pointer;
     transition: all 0.3s ease-in-out;
 }
 
@@ -166,6 +215,17 @@
 .cadastro-a p{
     font-size: 5rem;
 }
+
+.semReviewText{
+    font-size: 2rem;
+    font-weight: 300;
+    font-style: italic;
+
+    padding: 0.2rem;
+
+}
+
+
 
 @media screen and (max-width: 768px) {
     html{

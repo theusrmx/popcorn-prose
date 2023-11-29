@@ -120,8 +120,6 @@ function minhaListaDesejos() {
         })
         .then(data => {
             console.log("Lista de desejos obtida com sucesso:", data);
-
-            // Suponho que o objeto retornado tenha uma propriedade chamada 'filmes' que é uma lista de filmes na lista de desejos
             const filmesNaLista = data;
 
             // Preencher cards da lista de desejos
@@ -145,7 +143,7 @@ function criarCardListaDesejos(filme) {
     const cardDesejo = document.createElement('div');
     cardDesejo.classList.add('card-avaliacao');
 
-    // Consulte a TMDB API para obter detalhes do filme, incluindo o poster
+    // Consultando a TMDB API para obter detalhes do filme, incluindo o poster
     fetch(`https://api.themoviedb.org/3/${filme.tipoMidia}/${filme.idFilme}?api_key=${apiKey}&language=pt-BR`)
     .then(response => response.json())
     .then(data => {
@@ -154,7 +152,7 @@ function criarCardListaDesejos(filme) {
             const dataLancamento = (data.release_date || data.first_air_date)?.substring(0, 4) || 'N/A'; // Ano de lançamento
             const tituloFilme = filme.tipoMidia === 'movie' ? data.title : data.name; //verificação para qual dado recuperar, title (filmes) ou name (series)
             const sinopse = data.overview;
-    // Preencha o conteúdo do card da lista de desejos
+    // Preencher o conteúdo do card da lista de desejos
     cardDesejo.innerHTML = `
         <div class="left-column">
             <img src="https://image.tmdb.org/t/p/w500${posterPath}" alt="Poster">
@@ -210,7 +208,7 @@ function excluirItemLista(idFilme) {
         if (data.mensagem === "Filme removido com sucesso") {
             location.reload();
         } else {
-            // Se houver um erro, exiba uma mensagem de erro ou realize outra ação apropriada
+            // Se houver um erro, exiba uma mensagem de erro
             console.error(data.erro);
             alert("Erro ao remover filme da lista");
         }
@@ -326,7 +324,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     const novaImagem = e.target.result;
                     fotoPerfil.src = novaImagem;
 
-                    // Aqui você pode adicionar lógica para enviar a imagem para o backend
                     enviarImagemParaBackend(file);
                 };
 

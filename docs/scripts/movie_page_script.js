@@ -4,6 +4,7 @@ const apiKey = '557439512040e55c35f758f339c8e1d1';
 //const myAPIUrl = "http://localhost:8080";
 const myAPIUrl = "https://9722p18b-8080.brs.devtunnels.ms";
 
+
 const userID = localStorage.getItem('id');
 const token = localStorage.getItem('token');
 
@@ -52,7 +53,7 @@ function montarPagina() {
               idUser: localStorage.getItem('id')
           };
 
-          fetch('http://localhost:8080/review/getReview?idFilme=' + checkReviewData.idFilme + '&idUser=' + checkReviewData.idUser)
+          fetch(myAPIUrl + '/review/getReview?idFilme=' + checkReviewData.idFilme + '&idUser=' + checkReviewData.idUser)
               .then(response => {
                   if (response.ok) {
                       return response.json();
@@ -177,7 +178,7 @@ function montarPagina() {
       };
 
       // Faça a requisição POST para o backend
-      fetch('http://localhost:8080/review/addReview', {
+      fetch(myAPIUrl + '/review/addReview', {
           method: 'POST',
           headers: {
               'Content-Type': 'application/json',

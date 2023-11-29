@@ -5,8 +5,8 @@ const BASE_URL = 'https://image.tmdb.org/t/p/original/';
 const BASE_URL_LOGO = 'https://image.tmdb.org/t/p/original/';
 let interval = 5000;
 
-const myAPIUrl = "http://localhost:8080";
-//const myAPIUrl = "https://popcorn-prose-server.vercel.app";
+//const myAPIUrl = "http://localhost:8080";
+const myAPIUrl = "https://9722p18b-8080.brs.devtunnels.ms";
 
 
 //Função para carrregar conteudo popular de acordo com o paramento TIPO MIDIA - TV OU MOVIE

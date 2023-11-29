@@ -1,8 +1,8 @@
 /*****************************************************API**********************************/
 const apiKey = '557439512040e55c35f758f339c8e1d1';
 
-const myAPIUrl = "http://localhost:8080";
-//const myAPIUrl = "https://popcorn-prose-server.vercel.app";
+//const myAPIUrl = "http://localhost:8080";
+const myAPIUrl = "https://9722p18b-8080.brs.devtunnels.ms";
 
 const userID = localStorage.getItem('id');
 const token = localStorage.getItem('token');
